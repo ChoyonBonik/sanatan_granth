@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
+import 'package:sanatan_granth/core/theme/app_colors.dart';
+import 'package:sanatan_granth/core/theme/app_typography.dart';
 
 class ScripturalBanner extends StatelessWidget {
   final VoidCallback onExplore;
@@ -42,21 +42,21 @@ class ScripturalBanner extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Text(
-                  'DAILY SHLOKA',
+                  'দৈনিক অমৃতবাণী',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 11,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    letterSpacing: 1.2,
+                    letterSpacing: 0.5,
                   ),
                 ),
               ),
               const Spacer(),
               const Text(
-                'गीता २.४७',
+                'গীতা ২.৪৭',
                 style: TextStyle(
                   color: Colors.white70,
-                  fontSize: 13,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -64,20 +64,20 @@ class ScripturalBanner extends StatelessWidget {
           ),
           const SizedBox(height: 14),
           Text(
-            'कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥',
-            style: AppTypography.devanagariVerse(
-              fontSize: 18,
+            'কর্মণ্যেবাধিকারস্তে মা ফলেষু কদাচন।\nমা কর্মফলহেতুর্ভোর্মা তে সঙ্গোঽস্ত্বকর্মণি॥',
+            style: AppTypography.bengaliVerse(
+              fontSize: 19,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
           const SizedBox(height: 10),
           const Text(
-            'You have a right to perform your prescribed duty, but you are not entitled to the fruits of action.',
+            'কেবল কর্তব্য কর্ম সম্পাদনেই তোমার অধিকার রহিয়াছে, কিন্তু কর্মফলে কখনো তোমার অধিকার নাই।',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 13,
-              height: 1.4,
+              fontSize: 14,
+              height: 1.5,
               fontStyle: FontStyle.italic,
             ),
           ),
@@ -87,7 +87,7 @@ class ScripturalBanner extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: onExplore,
               icon: const Icon(Icons.menu_book_rounded, size: 16),
-              label: const Text('Read Gita'),
+              label: const Text('গীতা পাঠ করুন'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: AppColors.saffronDeep,

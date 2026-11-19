@@ -57,11 +57,11 @@ class DownloadProgressCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                '${(task.progress * 100).toInt()}% downloaded',
+                '${(task.progress * 100).toInt()}% ডাউনলোড সম্পন্ন',
                 style: theme.textTheme.bodySmall,
               ),
               Text(
-                '${(task.downloadedBytes / 1000000).toStringAsFixed(1)} MB / ${(task.totalBytes / 1000000).toStringAsFixed(1)} MB',
+                '${(task.downloadedBytes / 1000000).toStringAsFixed(1)} মেগাবাইট / ${(task.totalBytes / 1000000).toStringAsFixed(1)} মেগাবাইট',
                 style: theme.textTheme.bodySmall,
               ),
             ],

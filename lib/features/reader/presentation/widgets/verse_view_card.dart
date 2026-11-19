@@ -78,7 +78,7 @@ class VerseViewCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
-                    'VERSE ${verse.chapterNumber}.${verse.verseNumber}',
+                    'শ্লোক ${verse.chapterNumber}.${verse.verseNumber}',
                     style: const TextStyle(
                       color: AppColors.saffronDeep,
                       fontWeight: FontWeight.bold,
@@ -99,12 +99,12 @@ class VerseViewCard extends StatelessWidget {
                             : theme.iconTheme.color,
                         size: 22,
                       ),
-                      tooltip: 'Pronounce Sloka (TTS)',
+                      tooltip: 'শ্লোক উচ্চারণ শুনুন (টিটিএস)',
                       onPressed: onPlayTts,
                     ),
                     IconButton(
                       icon: const Icon(Icons.bookmark_add_outlined, size: 20),
-                      tooltip: 'Bookmark',
+                      tooltip: 'বুকমার্কে সংরক্ষণ',
                       onPressed: () {},
                     ),
                   ],
@@ -157,11 +157,11 @@ class VerseViewCard extends StatelessWidget {
             // Word-for-Word Meanings (if present)
             if (verse.wordMeanings != null) ...<Widget>[
               Text(
-                'SYNONYMS',
+                'শব্দার্থ ও অন্বয়',
                 style: TextStyle(
-                  fontSize: 11 * fontScale,
+                  fontSize: 12 * fontScale,
                   fontWeight: FontWeight.bold,
-                  letterSpacing: 1.0,
+                  letterSpacing: 0.5,
                   color: AppColors.saffronDeep,
                 ),
               ),
@@ -178,11 +178,11 @@ class VerseViewCard extends StatelessWidget {
 
             // Vernacular / English Translation
             Text(
-              'TRANSLATION',
+              'অনুবাদ',
               style: TextStyle(
-                fontSize: 11 * fontScale,
+                fontSize: 12 * fontScale,
                 fontWeight: FontWeight.bold,
-                letterSpacing: 1.0,
+                letterSpacing: 0.5,
                 color: AppColors.saffronDeep,
               ),
             ),
@@ -213,11 +213,11 @@ class VerseViewCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'PURPORT',
+                      'তাৎপর্য ও ভাবার্থ',
                       style: TextStyle(
-                        fontSize: 11 * fontScale,
+                        fontSize: 12 * fontScale,
                         fontWeight: FontWeight.bold,
-                        letterSpacing: 1.0,
+                        letterSpacing: 0.5,
                         color: AppColors.saffronPrimary,
                       ),
                     ),

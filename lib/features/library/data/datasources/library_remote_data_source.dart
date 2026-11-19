@@ -32,8 +32,7 @@ class LibraryRemoteDataSourceImpl implements LibraryRemoteDataSource {
         }
       }
       return _fallbackCategories;
-    } catch (e) {
-      // Fallback for offline or unconfigured Supabase
+    } catch (_) {
       return _fallbackCategories;
     }
   }
@@ -43,7 +42,7 @@ class LibraryRemoteDataSourceImpl implements LibraryRemoteDataSource {
     try {
       if (_supabaseClient != null) {
         var query = _supabaseClient.from(AppConstants.booksTable).select();
-        if (category != null && category != 'All') {
+        if (category != null && category != 'সকল গ্রন্থ' && category != 'All') {
           query = query.eq('category', category);
         }
         final List<Map<String, dynamic>> response =
@@ -52,12 +51,12 @@ class LibraryRemoteDataSourceImpl implements LibraryRemoteDataSource {
           return response.map(BookModel.fromJson).toList();
         }
       }
-      if (category != null && category != 'All') {
+      if (category != null && category != 'সকল গ্রন্থ' && category != 'All') {
         return _canonicalBooks.where((BookModel b) => b.category == category).toList();
       }
       return _canonicalBooks;
-    } catch (e) {
-      if (category != null && category != 'All') {
+    } catch (_) {
+      if (category != null && category != 'সকল গ্রন্থ' && category != 'All') {
         return _canonicalBooks.where((BookModel b) => b.category == category).toList();
       }
       return _canonicalBooks;
@@ -78,7 +77,7 @@ class LibraryRemoteDataSourceImpl implements LibraryRemoteDataSource {
         }
       }
       return _canonicalBooks.where((BookModel b) => b.isFeatured).toList();
-    } catch (e) {
+    } catch (_) {
       return _canonicalBooks.where((BookModel b) => b.isFeatured).toList();
     }
   }
@@ -104,7 +103,7 @@ class LibraryRemoteDataSourceImpl implements LibraryRemoteDataSource {
             b.author.toLowerCase().contains(q) ||
             b.category.toLowerCase().contains(q);
       }).toList();
-    } catch (e) {
+    } catch (_) {
       return _canonicalBooks.where((BookModel b) {
         return b.title.toLowerCase().contains(q) ||
             (b.sanskritTitle?.toLowerCase().contains(q) ?? false) ||
@@ -132,7 +131,7 @@ class LibraryRemoteDataSourceImpl implements LibraryRemoteDataSource {
                 orElse: () => null,
               );
       if (found != null) return found;
-      throw const ServerException(message: 'Book not found.');
+      throw const ServerException(message: 'গ্রন্থটি খুঁজে পাওয়া যায়নি।');
     } catch (e) {
       final BookModel? found =
           _canonicalBooks.cast<BookModel?>().firstWhere(
@@ -144,119 +143,141 @@ class LibraryRemoteDataSourceImpl implements LibraryRemoteDataSource {
     }
   }
 
-  // Pre-loaded canonical Hindu scriptural books
+  // প্রামাণ্য শাস্ত্রীয় গ্রন্থসমূহ (বাংলায় অনূদিত ও সুবিন্যস্ত)
   static final List<BookModel> _canonicalBooks = <BookModel>[
     const BookModel(
       id: 'gita-as-it-is',
-      title: 'Srimad Bhagavad Gita',
-      sanskritTitle: 'श्रीमद्भगवद्गीता',
-      author: 'Sri Krishna Dvaipayana Vyasa',
-      category: 'Bhagavad Gita',
+      title: 'শ্রীমদ্ভগবদ্গীতা যথার্থরূপ',
+      sanskritTitle: 'শ্রীমদ্ভগবদ্গীতা',
+      author: 'শ্রীকৃষ্ণদ্বৈপায়ন বেদব্যাস',
+      category: 'শ্রীমদ্ভগবদ্গীতা',
       description:
-          'The divine song spoken by Lord Sri Krishna to Arjuna on the battlefield of Kurukshetra. Contains 18 chapters and 700 verses expounding Karma, Jnana, and Bhakti Yoga.',
-      language: 'Sanskrit / English / Bengali',
+          'কুরুক্ষেত্রের পুণ্য ধর্মক্ষেত্রে পরমেশ্বর ভগবান শ্রীকৃষ্ণের মুখপদ্ম থেকে অর্জুনের প্রতি উচ্চারিত পরম তত্ত্ববাণী। এতে ১৮টি অধ্যায় ও ৭০০টি শ্লোকের মাধ্যমে কর্মযোগ, জ্ঞানযোগ ও পরম ভক্তিযোগের সারকথা প্রাঞ্জলভাবে বর্ণিত হয়েছে।',
+      language: 'সংস্কৃত ও বঙ্গানুবাদ',
       totalVerses: 700,
       format: BookFormat.structured,
       isFeatured: true,
       rating: 5.0,
-      viewsCount: 14500,
+      viewsCount: 18500,
     ),
     const BookModel(
       id: 'isha-upanishad',
-      title: 'Sri Isha Upanishad',
-      sanskritTitle: 'ईशोपनिषद्',
-      author: 'Vedic Rishis',
-      category: 'Upanishads',
+      title: 'শ্রী ঈশোপনিষদ',
+      sanskritTitle: 'ঈশোপনিষদ্',
+      author: 'বৈদিক ঋষিবৃন্দ',
+      category: 'উপনিষদ',
       description:
-          'One of the foremost Mukhya Upanishads belonging to the Shukla Yajurveda. Deals with divine omnipresence, renunciation, and self-realization.',
-      language: 'Sanskrit / English',
+          'শুক্ল যজুর্বেদের অন্তর্গত ১০৮টি উপনিষদের মধ্যমণি। এই উপনিষদে ঈশ্বরের সর্বব্যাপক সত্য, ত্যাগের মাধ্যমে ভোগ এবং পরমাত্মার অনুভূতি অত্যন্ত প্রজ্ঞার সাথে তুলে ধরা হয়েছে।',
+      language: 'সংস্কৃত ও বঙ্গানুবাদ',
       totalVerses: 18,
       format: BookFormat.structured,
       isFeatured: true,
       rating: 4.9,
-      viewsCount: 8200,
+      viewsCount: 9200,
     ),
     const BookModel(
       id: 'katha-upanishad',
-      title: 'Katha Upanishad',
-      sanskritTitle: 'कठोपनिषद्',
-      author: 'Vedic Rishis',
-      category: 'Upanishads',
+      title: 'কঠোপনিষদ',
+      sanskritTitle: 'কঠোপনিষদ্',
+      author: 'বৈদিক ঋষিবৃন্দ',
+      category: 'উপনিষদ',
       description:
-          'The legendary dialogue between Nachiketa and Yama Raja on the secrets of immortality, the soul (Atman), and the Supreme Reality.',
-      language: 'Sanskrit / English',
+          'ধর্মরাজ যম এবং বালক নচিকেতার মধ্যবর্তী পরম অমরত্ব, জন্ম-মৃত্যু রহস্য এবং অবিনশ্বর আত্মার স্বরূপ বিষয়ক গভীর আধ্যাত্মিক কথোপকথন।',
+      language: 'সংস্কৃত ও বঙ্গানুবাদ',
       totalVerses: 119,
       format: BookFormat.structured,
       isFeatured: true,
       rating: 4.9,
-      viewsCount: 6300,
+      viewsCount: 7400,
     ),
     const BookModel(
       id: 'srimad-bhagavatam',
-      title: 'Srimad Bhagavatam (Bhagavata Purana)',
-      sanskritTitle: 'श्रीमद्भागवतम्',
-      author: 'Srila Vyasadeva / Sukadeva Gosvami',
-      category: 'Puranas & Itihasa',
+      title: 'শ্রীমদ্ভাগবতম্ (ভাগবত পুরাণ)',
+      sanskritTitle: 'শ্রীমদ্ভাগবতম্',
+      author: 'শ্রীল বেদব্যাস ও শুকদেব গোস্বামী',
+      category: 'শ্রীমদ্ভাগবতম্',
       description:
-          'The immaculate Purana (Amala Purana) celebrating the transcendental lilas and avatars of Sri Vishnu and Bhagavan Krishna.',
-      language: 'Sanskrit / Bengali / English',
+          'অমল পুরাণ নামে খ্যাত বৈদিক সাহিত্যের অন্যতম শ্রেষ্ঠ চূড়ামণি। দ্বাদশ স্কন্ধে বিভক্ত এই মহাপুরাণে ভগবান শ্রীকৃষ্ণের লীলামৃত ও ভক্তিবেদান্ত তত্ত্ব পরিবেশিত হয়েছে।',
+      language: 'সংস্কৃত ও বঙ্গানুবাদ',
       totalVerses: 18000,
       format: BookFormat.structured,
       isFeatured: true,
       rating: 5.0,
-      viewsCount: 22000,
+      viewsCount: 25000,
+    ),
+    const BookModel(
+      id: 'chaitanya-charitamrita',
+      title: 'শ্রীচৈতন্যচরিতামৃত',
+      sanskritTitle: 'শ্রীচৈতন্যচরিতামৃত',
+      author: 'শ্রীল কৃষ্ণদাস কবিরাজ গোস্বামী',
+      category: 'শ্রীচৈতন্যচরিতামৃত',
+      description:
+          'কলিযুগপাবনাবতার পরম করুণাময় শ্রীকৃষ্ণচৈতন্য মহাপ্রভুর পুণ্য দিব্যলীলা, গৌড়ীয় বৈষ্ণব দর্শন ও রাধাকৃষ্ণ প্রেমতত্ত্বের অমৃতময় অমূল্য আকরগ্রন্থ।',
+      language: 'বাংলা পয়ার ও ত্রিপদী',
+      totalVerses: 11500,
+      format: BookFormat.structured,
+      isFeatured: true,
+      rating: 5.0,
+      viewsCount: 16800,
     ),
     const BookModel(
       id: 'valmiki-ramayana',
-      title: 'Valmiki Ramayana - Bala Kanda',
-      sanskritTitle: 'वाल्मीकि रामायणम्',
-      author: 'Maharshi Valmiki',
-      category: 'Ramayana',
+      title: 'বাল্মীকি রামায়ণ — আদিকাণ্ড',
+      sanskritTitle: 'বাল্মীকি রামায়ণ',
+      author: 'মহর্ষি বাল্মীকি',
+      category: 'রামায়ণ',
       description:
-          'The Adi Kavya detailing the noble life, righteousness (Dharma), and virtues of Maryada Purushottama Sri Ramachandra.',
-      language: 'Sanskrit / English',
+          'আদিকবি মহর্ষি বাল্মীকি প্রণীত আদি মহাকাব্য। মর্যাদা পুরুষোত্তম ভগবান শ্রীরামচন্দ্রের ধর্মনিষ্ঠ জীবন, সীতার পাতিব্রত্য ও লক্ষ্মণ-ভরতের আদর্শ ভ্রাতৃপ্রেমের কাহিনী।',
+      language: 'সংস্কৃত ও বঙ্গানুবাদ',
       totalVerses: 2250,
       format: BookFormat.pdf,
       isFeatured: false,
       rating: 4.8,
-      viewsCount: 9100,
+      viewsCount: 11200,
     ),
   ];
 
   static final List<CategoryModel> _fallbackCategories = <CategoryModel>[
     const CategoryModel(
       id: 'all',
-      name: 'All',
-      sanskritName: 'सर्व',
-      description: 'Entire library catalog',
-      bookCount: 50,
+      name: 'সকল গ্রন্থ',
+      sanskritName: 'সর্বশাস্ত্র',
+      description: 'গ্রন্থাগারের সমস্ত পবিত্র শাস্ত্রাবলী',
+      bookCount: 65,
     ),
     const CategoryModel(
       id: 'gita',
-      name: 'Bhagavad Gita',
-      sanskritName: 'श्रीमद्भगवद्गीता',
-      description: 'Song of the Supreme Godhead',
-      bookCount: 12,
+      name: 'শ্রীমদ্ভগবদ্গীতা',
+      sanskritName: 'গীতোপনিষদ',
+      description: 'ভগবান শ্রীকৃষ্ণের মুখনিঃসৃত অমৃতবাণী',
+      bookCount: 15,
     ),
     const CategoryModel(
       id: 'upanishads',
-      name: 'Upanishads',
-      sanskritName: 'उपनिषदः',
-      description: 'Philosophical essence of the Vedas (Vedanta)',
+      name: 'উপনিষদ',
+      sanskritName: 'উপনিষদাবলী',
+      description: 'বেদের জ্ঞানকাণ্ড ও বেদান্ত দর্শন',
       bookCount: 108,
     ),
     const CategoryModel(
+      id: 'bhagavatam',
+      name: 'শ্রীমদ্ভাগবতম্',
+      sanskritName: 'ভাগবত পুরাণ',
+      description: 'প্রেমভক্তির পরম শাস্ত্র',
+      bookCount: 12,
+    ),
+    const CategoryModel(
       id: 'vedas',
-      name: 'Vedas & Samhitas',
-      sanskritName: 'वेदाः',
-      description: 'Rig, Sama, Yajur, and Atharva Samhitas',
+      name: 'বেদ ও সংহিতা',
+      sanskritName: 'চতুর্বেদ',
+      description: 'ঋক, সাম, যজুঃ ও অথর্ববেদ সংহিতা',
       bookCount: 24,
     ),
     const CategoryModel(
       id: 'puranas',
-      name: 'Puranas & Itihasa',
-      sanskritName: 'पुराणेतिहास',
-      description: '18 Maha Puranas, Upa Puranas, and chronicles',
+      name: 'পুরাণ ও ইতিহাস',
+      sanskritName: 'পুরাণেতিহাস',
+      description: '১৮টি মহাপুরাণ ও ইতিহাস গ্রন্থাবলী',
       bookCount: 36,
     ),
   ];

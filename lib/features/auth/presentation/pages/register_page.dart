@@ -57,7 +57,7 @@ class _RegisterPageState extends State<RegisterPage> {
       },
       builder: (BuildContext context, AuthState state) {
         return Scaffold(
-          appBar: AppBar(title: const Text('Create Account')),
+          appBar: AppBar(title: const Text('অ্যাকাউন্ট তৈরি করুন')),
           body: SafeArea(
             child: Center(
               child: SingleChildScrollView(
@@ -70,7 +70,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       Center(
                         child: Text(
                           'ॐ',
-                          style: AppTypography.devanagariDisplay(
+                          style: AppTypography.bengaliDisplay(
                             fontSize: 56,
                             color: AppColors.saffronPrimary,
                           ),
@@ -78,7 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        'Join Sanatan Granth',
+                        'সনাতন গ্রন্থে যুক্ত হোন',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                               fontWeight: FontWeight.bold,
@@ -88,11 +88,11 @@ class _RegisterPageState extends State<RegisterPage> {
 
                       AuthTextField(
                         controller: _nameController,
-                        label: 'Full Name / Devotee Name',
+                        label: 'পূর্ণ নাম / ভক্তের নাম',
                         prefixIcon: Icons.person_outline,
                         validator: (String? val) {
                           if (val == null || val.isEmpty) {
-                            return 'Name is required';
+                            return 'নাম আবশ্যক';
                           }
                           return null;
                         },
@@ -101,12 +101,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
                       AuthTextField(
                         controller: _emailController,
-                        label: 'Email Address',
+                        label: 'ইমেইল ঠিকানা',
                         prefixIcon: Icons.email_outlined,
                         keyboardType: TextInputType.emailAddress,
                         validator: (String? val) {
                           if (val == null || !val.contains('@')) {
-                            return 'Enter a valid email';
+                            return 'সঠিক ইমেইল ঠিকানা লিখুন';
                           }
                           return null;
                         },
@@ -115,7 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                       AuthTextField(
                         controller: _passwordController,
-                        label: 'Password',
+                        label: 'পাসওয়ার্ড',
                         prefixIcon: Icons.lock_outline,
                         obscureText: _obscurePassword,
                         suffixIcon: IconButton(
@@ -128,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         validator: (String? val) {
                           if (val == null || val.length < 6) {
-                            return 'Password must be at least 6 characters';
+                            return 'পাসওয়ার্ড অন্তত ৬ অক্ষরের হতে হবে';
                           }
                           return null;
                         },
@@ -136,7 +136,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       const SizedBox(height: 24),
 
                       SaffronButton(
-                        text: 'Register Account',
+                        text: 'অ্যাকাউন্ট তৈরি করুন',
                         isLoading: state.status == AuthStatus.loading,
                         onPressed: _onRegister,
                       ),

@@ -11,7 +11,7 @@ class ContributeDashboardPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Seva & Contribution Portal'),
+        title: const Text('সেবা ও অবদান পোর্টাল'),
       ),
       body: ListView(
         padding: const EdgeInsets.all(20),
@@ -31,7 +31,7 @@ class ContributeDashboardPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 const Text(
-                  'विद्यादानं महत्पुण्यम्',
+                  'বিদ্যাদান পরম পুণ্য',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
@@ -40,14 +40,14 @@ class ContributeDashboardPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 const Text(
-                  'Share and preserve rare Hindu manuscripts, digital PDF/EPUB scriptures, and structured translations for global devotees.',
+                  'সনাতন শাস্ত্র, দুষ্প্রাপ্য পাণ্ডুলিপি, ডিজিটাল পিডিএফ/ইপাব ও শ্লোকভিত্তিক অনুবাদ বিশ্বজুড়ে ভক্তদের কল্যাণে উন্মুক্ত করুন।',
                   style: TextStyle(color: Colors.white70, fontSize: 13, height: 1.5),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton.icon(
                   onPressed: () => context.push('/contribute/tracker'),
                   icon: const Icon(Icons.history_rounded, size: 18),
-                  label: const Text('My Submissions & Status'),
+                  label: const Text('আমার অবদান ও অগ্রগতি'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: AppColors.saffronDeep,
@@ -62,7 +62,7 @@ class ContributeDashboardPage extends StatelessWidget {
           const SizedBox(height: 24),
 
           Text(
-            'Ways to Contribute',
+            'অবদানের ক্ষেত্রসমূহ',
             style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 14),
@@ -70,9 +70,9 @@ class ContributeDashboardPage extends StatelessWidget {
           _buildActionCard(
             context,
             icon: Icons.picture_as_pdf_rounded,
-            title: 'Upload Book (PDF / EPUB)',
+            title: 'শাস্ত্রীয় গ্রন্থ আপলোড (পিডিএফ / ইপাব)',
             subtitle:
-                'Submit high-quality scanned scriptures, rare commentaries, or authentic digital books.',
+                'উন্নত মানের স্ক্যানকৃত শাস্ত্র, দুর্লভ টীকা-ভাষ্য বা ডিজিটাল গ্রন্থ জমা দিন।',
             onTap: () => context.push('/contribute/upload-document'),
           ),
 
@@ -81,9 +81,9 @@ class ContributeDashboardPage extends StatelessWidget {
           _buildActionCard(
             context,
             icon: Icons.table_chart_rounded,
-            title: 'Structured Verse CSV / JSON Uploader',
+            title: 'কাঠামোগত শ্লোক আপলোড (সিএসভি / জেএসওন)',
             subtitle:
-                'Upload bulk slokas, word-for-word synonyms, Roman IAST, and commentaries via CSV or JSON.',
+                'শ্লোক, শব্দার্থ, অন্বয়, বঙ্গানুবাদ ও তাৎপর্য সহজে ফাইল আকারে একযোগে আপলোড করুন।',
             onTap: () => context.push('/contribute/upload-csv'),
           ),
 
@@ -92,9 +92,9 @@ class ContributeDashboardPage extends StatelessWidget {
           _buildActionCard(
             context,
             icon: Icons.track_changes_rounded,
-            title: 'Pending Status Tracker',
+            title: 'পর্যালোচনা ও যাচাই অগ্রগতি',
             subtitle:
-                'Monitor verification progress by our scholarly review committee and editorial team.',
+                'পণ্ডিতমণ্ডলী ও সম্পাদনা পর্ষদের যাচাই প্রক্রিয়ার অগ্রগতি পর্যবেক্ষণ করুন।',
             onTap: () => context.push('/contribute/tracker'),
           ),
         ],

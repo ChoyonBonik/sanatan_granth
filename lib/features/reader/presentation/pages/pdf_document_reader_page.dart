@@ -28,7 +28,7 @@ class _PdfDocumentReaderPageState extends State<PdfDocumentReaderPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Scripture Document Reader'),
+        title: const Text('শাস্ত্রীয় নথি পাঠক'),
         actions: <Widget>[
           Center(
             child: Padding(

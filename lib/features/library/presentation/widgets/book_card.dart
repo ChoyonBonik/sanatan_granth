@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
+import 'package:sanatan_granth/core/theme/app_colors.dart';
+import 'package:sanatan_granth/core/theme/app_typography.dart';
 import '../../domain/entities/book_entity.dart';
 
 class BookCard extends StatelessWidget {
@@ -16,6 +16,13 @@ class BookCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+
+    String formatLabel = 'শ্লোক';
+    if (book.format == BookFormat.pdf) {
+      formatLabel = 'পিডিএফ';
+    } else if (book.format == BookFormat.epub) {
+      formatLabel = 'ইপাব';
+    }
 
     return InkWell(
       onTap: onTap,
@@ -57,9 +64,9 @@ class BookCard extends StatelessWidget {
                   Center(
                     child: Text(
                       'ॐ',
-                      style: AppTypography.devanagariDisplay(
-                        fontSize: 48,
-                        color: Colors.white.withAlpha(80),
+                      style: AppTypography.bengaliDisplay(
+                        fontSize: 52,
+                        color: Colors.white.withAlpha(85),
                       ),
                     ),
                   ),
@@ -73,7 +80,7 @@ class BookCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
-                        book.format.name.toUpperCase(),
+                        formatLabel,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 10,
@@ -87,12 +94,12 @@ class BookCard extends StatelessWidget {
             ),
             const SizedBox(height: 12),
 
-            // Sanskrit Title (if available)
+            // Sanskrit / Classical Title (if available)
             if (book.sanskritTitle != null)
               Text(
                 book.sanskritTitle!,
-                style: AppTypography.devanagariVerse(
-                  fontSize: 14,
+                style: AppTypography.bengaliVerse(
+                  fontSize: 13,
                   fontWeight: FontWeight.w600,
                   color: AppColors.saffronDeep,
                 ),
@@ -100,7 +107,7 @@ class BookCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
 
-            // English / Main Title
+            // Main Title
             Text(
               book.title,
               style: theme.textTheme.titleMedium?.copyWith(
@@ -125,9 +132,9 @@ class BookCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  book.totalVerses > 0 ? '${book.totalVerses} Verses' : book.category,
+                  book.totalVerses > 0 ? '${book.totalVerses}টি শ্লোক' : book.category,
                   style: theme.textTheme.bodySmall?.copyWith(
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                     color: AppColors.saffronPrimary,
                   ),
                 ),

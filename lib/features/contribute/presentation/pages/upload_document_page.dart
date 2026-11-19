@@ -52,7 +52,7 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
     if (!_formKey.currentState!.validate()) return;
     if (_selectedFilePath == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please select a PDF or EPUB document')),
+        const SnackBar(content: Text('অনুগ্রহ করে একটি পিডিএফ বা ইপাব ফাইল নির্বাচন করুন')),
       );
       return;
     }
@@ -80,7 +80,7 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text('Upload Scripture Document')),
+        appBar: AppBar(title: const Text('শাস্ত্রীয় নথি আপলোড')),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
           child: Form(
@@ -115,13 +115,13 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
                         ),
                         const SizedBox(height: 12),
                         Text(
-                          _selectedFileName ?? 'Tap to pick PDF or EPUB file',
+                          _selectedFileName ?? 'পিডিএফ বা ইপাব ফাইল নির্বাচন করতে ট্যাপ করুন',
                           style: const TextStyle(fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 4),
                         const Text(
-                          'Supported: .pdf, .epub up to 50MB',
+                          'সমর্থিত ফরম্যাট: .pdf, .epub (সর্বোচ্চ ৫০ মেগাবাইট)',
                           style: TextStyle(fontSize: 12, color: Colors.grey),
                         ),
                       ],
@@ -133,35 +133,35 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
                 TextFormField(
                   controller: _titleController,
                   decoration: const InputDecoration(
-                    labelText: 'Scripture Title *',
-                    hintText: 'e.g. Srimad Bhagavad Gita with Shankara Bhashya',
+                    labelText: 'শাস্ত্রের নাম *',
+                    hintText: 'যেমন: শ্রীমদ্ভগবদ্গীতা শঙ্করভাষ্য',
                     border: OutlineInputBorder(),
                   ),
                   validator: (String? val) =>
-                      val == null || val.isEmpty ? 'Title is required' : null,
+                      val == null || val.isEmpty ? 'শাস্ত্রের নাম আবশ্যক' : null,
                 ),
                 const SizedBox(height: 16),
 
                 TextFormField(
                   controller: _authorController,
                   decoration: const InputDecoration(
-                    labelText: 'Author / Sage / Translator *',
-                    hintText: 'e.g. Adi Shankaracharya',
+                    labelText: 'রচয়িতা / ভাষ্যকার / অনুবাদক *',
+                    hintText: 'যেমন: আদি শঙ্করাচার্য',
                     border: OutlineInputBorder(),
                   ),
                   validator: (String? val) =>
-                      val == null || val.isEmpty ? 'Author is required' : null,
+                      val == null || val.isEmpty ? 'রচয়িতা বা ভাষ্যকারের নাম আবশ্যক' : null,
                 ),
                 const SizedBox(height: 16),
 
                 DropdownButtonFormField<String>(
                   value: _selectedCategory,
                   decoration: const InputDecoration(
-                    labelText: 'Scriptural Category',
+                    labelText: 'শাস্ত্রীয় বিভাগ',
                     border: OutlineInputBorder(),
                   ),
                   items: AppConstants.canonicalCategories
-                      .where((String c) => c != 'All')
+                      .where((String c) => c != AppConstants.canonicalCategories[0])
                       .map((String cat) => DropdownMenuItem<String>(
                             value: cat,
                             child: Text(cat),
@@ -184,7 +184,7 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
                     ),
                   ),
                   child: const Text(
-                    'Submit for Review',
+                    'পর্যালোচনার জন্য জমা দিন',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),

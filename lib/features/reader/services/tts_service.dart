@@ -9,9 +9,12 @@ class TtsService {
   TtsState get state => _state;
 
   Future<void> initialize() async {
-    await _flutterTts.setSpeechRate(0.45); // Slower, solemn pace for sacred verses
+    await _flutterTts.setSpeechRate(0.42); // Solemn, clear pace for sacred Bengali verses
     await _flutterTts.setPitch(1.0);
     await _flutterTts.setVolume(1.0);
+
+    // Default to Bengali
+    await _flutterTts.setLanguage('bn-IN');
 
     _flutterTts.setStartHandler(() {
       _state = TtsState.playing;
@@ -28,12 +31,11 @@ class TtsService {
 
   Future<void> speak({
     required String text,
-    String languageCode = 'sa-IN', // Defaults to Sanskrit/Hindi
+    String languageCode = 'bn-IN', // Defaults to Bengali
   }) async {
-    // Select best speech language
-    if (languageCode == 'bn' || languageCode == 'bn-IN' || languageCode == 'bn-BD') {
+    if (languageCode.startsWith('bn')) {
       await _flutterTts.setLanguage('bn-IN');
-    } else if (languageCode == 'sa' || languageCode == 'sa-IN' || languageCode == 'hi-IN') {
+    } else if (languageCode.startsWith('sa') || languageCode.startsWith('hi')) {
       await _flutterTts.setLanguage('hi-IN');
     } else {
       await _flutterTts.setLanguage('en-US');

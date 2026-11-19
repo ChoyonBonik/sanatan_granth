@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/theme/app_colors.dart';
+import 'package:sanatan_granth/core/theme/app_colors.dart';
 import '../../domain/entities/book_entity.dart';
 import '../bloc/library_bloc.dart';
 import '../bloc/library_event.dart';
@@ -33,7 +33,7 @@ class _SearchPageState extends State<SearchPage> {
           controller: _searchController,
           autofocus: true,
           decoration: InputDecoration(
-            hintText: 'Search slokas, Gita, Upanishads...',
+            hintText: 'শ্লোক, গীতা, উপনিষদ, পুরাণ অনুসন্ধান...',
             border: InputBorder.none,
             hintStyle: TextStyle(color: theme.textTheme.bodySmall?.color),
           ),
@@ -72,7 +72,7 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Search across Vedas, Upanishads & Gita',
+                    'বেদ, উপনিষদ ও গীতার বিশাল সম্ভার থেকে অনুসন্ধান করুন',
                     style: theme.textTheme.bodyMedium,
                   ),
                 ],
@@ -83,7 +83,7 @@ class _SearchPageState extends State<SearchPage> {
           if (state.searchResults.isEmpty) {
             return Center(
               child: Text(
-                'No scripture found matching "${state.searchQuery}"',
+                '"${state.searchQuery}" এর সাথে মিলে এমন কোনো শাস্ত্র পাওয়া যায়নি',
                 style: theme.textTheme.bodyMedium,
               ),
             );
@@ -104,7 +104,7 @@ class _SearchPageState extends State<SearchPage> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: const Center(
-                    child: Text('ॐ', style: TextStyle(fontSize: 20)),
+                    child: Text('ॐ', style: TextStyle(fontSize: 22)),
                   ),
                 ),
                 title: Text(

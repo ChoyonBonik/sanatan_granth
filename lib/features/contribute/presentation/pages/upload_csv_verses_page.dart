@@ -17,7 +17,7 @@ class _UploadCsvVersesPageState extends State<UploadCsvVersesPage> {
   final TextEditingController _csvController = TextEditingController();
 
   static const String _templateCsv = '''chapter,verse,sanskrit_text,transliteration,synonyms,translation,purport
-1,1,"धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः।","dharma-kṣetre kuru-kṣetre samavetā yuyutsavaḥ","dharma-kṣetre—in the place of pilgrimage; kuru-kṣetre—in the place named Kurukṣetra","Dhritarashtra said: O Sanjaya, after my sons and the sons of Pandu assembled in the place of pilgrimage at Kurukshetra...","Bhagavad-gita is the widely read theistic science summarized in the Gita-mahatmya."''';
+1,1,"ধর্মক্ষেত্রে কুরুক্ষেত্রে সমবেতা যুযুত্সবঃ।","dharmakṣetre kurukṣetre samavetā yuyutsavaḥ","ধর্মক্ষেত্রে—ধর্মভূমি; কুরুক্ষেত্রে—কুরুক্ষেত্রে; সমবেতাঃ—সমবেত হয়ে; যুযুত্সবঃ—যুদ্ধাভিলাষী","ধৃতরাষ্ট্র বললেন: হে সঞ্জয়, ধর্মক্ষেত্র কুরুক্ষেত্রে যুদ্ধাভিলাষী আমার ও পাণ্ডুর ছেলেরা সমবেত হয়ে কি করলো?","ভগবদ্গীতা পরম প্রামাণিক আস্তিক বিজ্ঞান।"''';
 
   @override
   void initState() {
@@ -35,13 +35,13 @@ class _UploadCsvVersesPageState extends State<UploadCsvVersesPage> {
   void _submit() {
     if (_titleController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter scripture title')),
+        const SnackBar(content: Text('অনুগ্রহ করে শাস্ত্রের নাম ও অধ্যায় লিখুন')),
       );
       return;
     }
     if (_csvController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter CSV or JSON verses')),
+        const SnackBar(content: Text('অনুগ্রহ করে সিএসভি বা শ্লোক তথ্য লিখুন')),
       );
       return;
     }
@@ -66,7 +66,7 @@ class _UploadCsvVersesPageState extends State<UploadCsvVersesPage> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text('Structured Verse CSV Uploader')),
+        appBar: AppBar(title: const Text('কাঠামোগত শ্লোক আপলোডার')),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
           child: Column(
@@ -75,8 +75,8 @@ class _UploadCsvVersesPageState extends State<UploadCsvVersesPage> {
               TextField(
                 controller: _titleController,
                 decoration: const InputDecoration(
-                  labelText: 'Scripture Name & Canto/Chapter *',
-                  hintText: 'e.g. Srimad Bhagavatam - Canto 1 Chapter 1',
+                  labelText: 'শাস্ত্রের নাম ও স্কন্ধ/অধ্যায় *',
+                  hintText: 'যেমন: শ্রীমদ্ভগবদ্গীতা - প্রথম অধ্যায়',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -86,12 +86,12 @@ class _UploadCsvVersesPageState extends State<UploadCsvVersesPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   const Text(
-                    'CSV Data (Header required)',
+                    'সিএসভি শ্লোক তথ্য (হেডার আবশ্যক)',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextButton.icon(
                     icon: const Icon(Icons.refresh, size: 16),
-                    label: const Text('Reset Template'),
+                    label: const Text('নমুনা পুনঃস্থাপন'),
                     onPressed: () => _csvController.text = _templateCsv,
                   ),
                 ],
@@ -113,7 +113,7 @@ class _UploadCsvVersesPageState extends State<UploadCsvVersesPage> {
 
               ElevatedButton.icon(
                 icon: const Icon(Icons.cloud_upload_rounded),
-                label: const Text('Validate & Submit CSV'),
+                label: const Text('যাচাই করে জমা দিন'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.saffronPrimary,
                   foregroundColor: Colors.white,

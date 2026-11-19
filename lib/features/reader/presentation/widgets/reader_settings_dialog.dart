@@ -13,14 +13,14 @@ class ReaderSettingsDialog extends StatelessWidget {
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (BuildContext context, ThemeState state) {
         return AlertDialog(
-          title: const Text('Reader Preferences'),
+          title: const Text('পঠন পছন্দসমূহ'),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 const Text(
-                  'Theme Palette',
+                  'থিম রূপরেখা',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
@@ -28,21 +28,21 @@ class ReaderSettingsDialog extends StatelessWidget {
                   children: <Widget>[
                     _buildThemeChip(
                       context,
-                      label: 'Sepia',
+                      label: 'সেপিয়া',
                       mode: AppThemeMode.sepia,
                       current: state.themeMode,
                     ),
                     const SizedBox(width: 8),
                     _buildThemeChip(
                       context,
-                      label: 'Light',
+                      label: 'উজ্জ্বল',
                       mode: AppThemeMode.light,
                       current: state.themeMode,
                     ),
                     const SizedBox(width: 8),
                     _buildThemeChip(
                       context,
-                      label: 'AMOLED',
+                      label: 'অ্যামোলেড',
                       mode: AppThemeMode.amoledDark,
                       current: state.themeMode,
                     ),
@@ -50,12 +50,12 @@ class ReaderSettingsDialog extends StatelessWidget {
                 ),
                 const SizedBox(height: 18),
                 const Text(
-                  'Text Size',
+                  'অক্ষরের আকার',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Row(
                   children: <Widget>[
-                    const Text('A', style: TextStyle(fontSize: 14)),
+                    const Text('অ', style: TextStyle(fontSize: 14)),
                     Expanded(
                       child: Slider(
                         value: state.fontScale,
@@ -68,13 +68,13 @@ class ReaderSettingsDialog extends StatelessWidget {
                         },
                       ),
                     ),
-                    const Text('A', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                    const Text('অ', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
                   ],
                 ),
                 const SizedBox(height: 12),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('IAST Transliteration'),
+                  title: const Text('উচ্চারণ ও অন্বয় (লিপ্যন্তর)'),
                   value: state.showTransliteration,
                   activeColor: AppColors.saffronPrimary,
                   onChanged: (bool val) {
@@ -83,7 +83,7 @@ class ReaderSettingsDialog extends StatelessWidget {
                 ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('Purport & Commentary'),
+                  title: const Text('তাৎপর্য ও ব্যাখ্যা'),
                   value: state.showCommentary,
                   activeColor: AppColors.saffronPrimary,
                   onChanged: (bool val) {
@@ -92,7 +92,7 @@ class ReaderSettingsDialog extends StatelessWidget {
                 ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('Audio Verse Highlight'),
+                  title: const Text('অডিও শ্লোক স্বয়ংক্রিয় হাইলাইট'),
                   value: state.autoHighlightAudio,
                   activeColor: AppColors.saffronPrimary,
                   onChanged: (bool val) {
@@ -104,7 +104,7 @@ class ReaderSettingsDialog extends StatelessWidget {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Done'),
+              child: const Text('সম্পন্ন'),
               onPressed: () => Navigator.pop(context),
             ),
           ],

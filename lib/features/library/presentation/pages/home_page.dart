@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_theme.dart';
-import '../../../../core/theme/bloc/theme_cubit.dart';
-import '../../../../core/theme/bloc/theme_state.dart';
+import 'package:sanatan_granth/core/theme/app_colors.dart';
+import 'package:sanatan_granth/core/theme/app_theme.dart';
+import 'package:sanatan_granth/core/theme/bloc/theme_cubit.dart';
+import 'package:sanatan_granth/core/theme/bloc/theme_state.dart';
 import '../../domain/entities/book_entity.dart';
 import '../bloc/library_bloc.dart';
 import '../bloc/library_event.dart';
@@ -33,16 +33,16 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('सनातन ग्रन्थ'),
+        title: const Text('সনাতন গ্রন্থ'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.search_rounded),
-            tooltip: 'Search Scriptures',
+            tooltip: 'শাস্ত্র অনুসন্ধান',
             onPressed: () => context.push('/search'),
           ),
           IconButton(
             icon: const Icon(Icons.palette_outlined),
-            tooltip: 'Theme Settings',
+            tooltip: 'পঠন থিম',
             onPressed: () => _showThemePicker(context),
           ),
         ],
@@ -97,15 +97,15 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          state.selectedCategory == 'All'
-                              ? 'Sacred Canons'
+                          state.selectedCategory == 'সকল গ্রন্থ' || state.selectedCategory == 'All'
+                              ? 'পবিত্র শাস্ত্রমালা'
                               : state.selectedCategory,
                           style: theme.textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          '${state.books.length} Books',
+                          '${state.books.length}টি গ্রন্থ',
                           style: theme.textTheme.bodySmall,
                         ),
                       ],
@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                   const SliverFillRemaining(
                     hasScrollBody: false,
                     child: Center(
-                      child: Text('No books found for this category.'),
+                      child: Text('এই বিভাগে কোনো গ্রন্থ পাওয়া যায়নি।'),
                     ),
                   )
                 else
@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Reading Themes',
+                      'পঠন থিম নির্বাচন',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -180,24 +180,24 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(height: 16),
                     _buildThemeTile(
                       ctx,
-                      title: 'Warm Sepia (Vedic Parchment)',
-                      subtitle: 'Palm-leaf tone for comfortable reading',
+                      title: 'উষ্ণ ভুর্জপত্র (সেপিয়া)',
+                      subtitle: 'দীর্ঘ সময় স্বস্তিদায়ক পাঠের জন্য প্রাচীন পাণ্ডুলিপি রূপ',
                       mode: AppThemeMode.sepia,
                       current: themeState.themeMode,
                       color: AppColors.sepiaBackground,
                     ),
                     _buildThemeTile(
                       ctx,
-                      title: 'Pure Light',
-                      subtitle: 'Crisp high-contrast day palette',
+                      title: 'উজ্জ্বল দিন',
+                      subtitle: 'দিনের আলোয় পাঠের জন্য পরিচ্ছন্ন শ্বেত রূপরেখা',
                       mode: AppThemeMode.light,
                       current: themeState.themeMode,
                       color: AppColors.lightBackground,
                     ),
                     _buildThemeTile(
                       ctx,
-                      title: 'AMOLED Dark',
-                      subtitle: 'True black 0-nit display for night reading',
+                      title: 'অ্যামোলেড ডার্ক (নিখুঁত কালো)',
+                      subtitle: 'রাতের নীরব সাধনা ও পাঠের জন্য অক্ষিরক্ষাকারী অন্ধকার রূপ',
                       mode: AppThemeMode.amoledDark,
                       current: themeState.themeMode,
                       color: AppColors.amoledBackground,

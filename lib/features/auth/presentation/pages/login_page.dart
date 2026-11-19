@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                       Center(
                         child: Text(
                           'ॐ',
-                          style: AppTypography.devanagariDisplay(
+                          style: AppTypography.bengaliDisplay(
                             fontSize: 72,
                             color: AppColors.saffronPrimary,
                           ),
@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        'सनातन ग्रन्थ',
+                        'সনাতন গ্রন্থ',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                               fontWeight: FontWeight.bold,
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'Sign in to access your reading progress, notes, and community seva.',
+                        'পাঠের অগ্রগতি, বুকমার্ক ও শাস্ত্রীয় সেবায় যুক্ত হতে প্রবেশ করুন।',
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
@@ -91,12 +91,12 @@ class _LoginPageState extends State<LoginPage> {
 
                       AuthTextField(
                         controller: _emailController,
-                        label: 'Email Address',
+                        label: 'ইমেইল ঠিকানা',
                         prefixIcon: Icons.email_outlined,
                         keyboardType: TextInputType.emailAddress,
                         validator: (String? val) {
                           if (val == null || !val.contains('@')) {
-                            return 'Enter a valid email';
+                            return 'সঠিক ইমেইল ঠিকানা লিখুন';
                           }
                           return null;
                         },
@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
 
                       AuthTextField(
                         controller: _passwordController,
-                        label: 'Password',
+                        label: 'পাসওয়ার্ড',
                         prefixIcon: Icons.lock_outline,
                         obscureText: _obscurePassword,
                         suffixIcon: IconButton(
@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         validator: (String? val) {
                           if (val == null || val.length < 6) {
-                            return 'Password must be at least 6 characters';
+                            return 'পাসওয়ার্ড অন্তত ৬ অক্ষরের হতে হবে';
                           }
                           return null;
                         },
@@ -126,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(height: 24),
 
                       SaffronButton(
-                        text: 'Sign In',
+                        text: 'প্রবেশ করুন',
                         isLoading: state.status == AuthStatus.loading,
                         onPressed: _onLogin,
                       ),
@@ -135,11 +135,11 @@ class _LoginPageState extends State<LoginPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          const Text("Don't have an account?"),
+                          const Text('কোনো অ্যাকাউন্ট নেই?'),
                           TextButton(
                             onPressed: () => context.push('/register'),
                             child: const Text(
-                              'Register',
+                              'নিবন্ধন করুন',
                               style: TextStyle(color: AppColors.saffronPrimary),
                             ),
                           ),

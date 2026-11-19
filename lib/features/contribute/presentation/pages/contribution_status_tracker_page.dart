@@ -26,7 +26,7 @@ class _ContributionStatusTrackerPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Contribution Tracker')),
+      appBar: AppBar(title: const Text('অবদান ও যাচাই অগ্রগতি')),
       body: BlocBuilder<ContributeBloc, ContributeState>(
         builder: (BuildContext context, ContributeState state) {
           if (state.status == ContributeStatus.loading &&
@@ -38,7 +38,7 @@ class _ContributionStatusTrackerPageState
 
           if (state.contributions.isEmpty) {
             return const Center(
-              child: Text('No contributions submitted yet.'),
+              child: Text('এখনও কোনো অবদান জমা দেওয়া হয়নি।'),
             );
           }
 
@@ -81,7 +81,7 @@ class _ContributionStatusTrackerPageState
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '${contrib.category} • ${contrib.type.name.toUpperCase()} • ${contrib.totalItemsCount} items',
+                      '${contrib.category} • ${_getTypeLabel(contrib.type)} • ${contrib.totalItemsCount}টি উপাদান',
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     if (contrib.reviewerNotes != null) ...<Widget>[
@@ -123,5 +123,18 @@ class _ContributionStatusTrackerPageState
 
   String _formatDate(DateTime dt) {
     return '${dt.day}/${dt.month}/${dt.year}';
+  }
+
+  String _getTypeLabel(ContributionType type) {
+    switch (type) {
+      case ContributionType.bookPdf:
+        return 'পিডিএফ নথি';
+      case ContributionType.bookEpub:
+        return 'ইপাব নথি';
+      case ContributionType.verseCsv:
+        return 'সিএসভি শ্লোকাবলী';
+      case ContributionType.verseJson:
+        return 'জেএসওন শ্লোকাবলী';
+    }
   }
 }

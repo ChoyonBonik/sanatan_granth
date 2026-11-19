@@ -29,7 +29,7 @@ class _DownloadManagerPageState extends State<DownloadManagerPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Offline Storage & Downloads'),
+        title: const Text('অফলাইন ভাণ্ডার ও ডাউনলোড'),
       ),
       body: BlocBuilder<OfflineBloc, OfflineState>(
         builder: (BuildContext context, OfflineState state) {
@@ -64,12 +64,12 @@ class _DownloadManagerPageState extends State<DownloadManagerPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           const Text(
-                            'Drift SQLite Offline Vault',
+                            'স্থানীয় অফলাইন সংগ্রহাগার',
                             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            '${state.cachedBooks.length} Books cached locally • Fast zero-latency reading',
+                            '${state.cachedBooks.length}টি গ্রন্থ সংরক্ষিত • ইন্টারনেট ছাড়াই দ্রুত পাঠযোগ্য',
                             style: theme.textTheme.bodySmall,
                           ),
                         ],
@@ -83,7 +83,7 @@ class _DownloadManagerPageState extends State<DownloadManagerPage> {
               // Active Downloads Section
               if (state.activeDownloads.isNotEmpty) ...<Widget>[
                 Text(
-                  'Active Downloads',
+                  'চলতি ডাউনলোড',
                   style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 12),
@@ -103,7 +103,7 @@ class _DownloadManagerPageState extends State<DownloadManagerPage> {
 
               // Cached Books
               Text(
-                'Downloaded Scriptures',
+                'সংরক্ষিত শাস্ত্রসমূহ',
                 style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
@@ -116,10 +116,10 @@ class _DownloadManagerPageState extends State<DownloadManagerPage> {
                       children: <Widget>[
                         Icon(Icons.cloud_off_rounded, size: 56, color: theme.disabledColor),
                         const SizedBox(height: 12),
-                        const Text('No scriptures cached yet.'),
+                        const Text('এখনও কোনো শাস্ত্র অফলাইনে সংরক্ষিত নেই।'),
                         const SizedBox(height: 4),
                         Text(
-                          'Download books from the library to read offline anytime.',
+                          'ইন্টারনেট ছাড়াই পড়তে গ্রন্থাগার থেকে শাস্ত্র ডাউনলোড করে রাখুন।',
                           style: theme.textTheme.bodySmall,
                         ),
                       ],
