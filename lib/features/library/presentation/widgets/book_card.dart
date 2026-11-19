@@ -43,16 +43,16 @@ class BookCard extends StatelessWidget {
             ),
           ],
         ),
-        padding: const EdgeInsets.all(14),
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             // Cover placeholder / format badge
             Container(
-              height: 120,
+              height: 100,
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
                 gradient: const LinearGradient(
                   colors: <Color>[AppColors.saffronDeep, AppColors.rudrakshaMaroon],
                   begin: Alignment.topLeft,
@@ -65,25 +65,25 @@ class BookCard extends StatelessWidget {
                     child: Text(
                       'ॐ',
                       style: AppTypography.bengaliDisplay(
-                        fontSize: 52,
+                        fontSize: 44,
                         color: Colors.white.withAlpha(85),
                       ),
                     ),
                   ),
                   Positioned(
-                    top: 8,
-                    right: 8,
+                    top: 6,
+                    right: 6,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                       decoration: BoxDecoration(
                         color: Colors.black54,
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
                         formatLabel,
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 10,
+                          fontSize: 9,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -92,60 +92,71 @@ class BookCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
 
             // Sanskrit / Classical Title (if available)
-            if (book.sanskritTitle != null)
+            if (book.sanskritTitle != null) ...<Widget>[
               Text(
                 book.sanskritTitle!,
                 style: AppTypography.bengaliVerse(
-                  fontSize: 13,
+                  fontSize: 12,
                   fontWeight: FontWeight.w600,
                   color: AppColors.saffronDeep,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
+              const SizedBox(height: 2),
+            ],
 
             // Main Title
             Text(
               book.title,
-              style: theme.textTheme.titleMedium?.copyWith(
+              style: theme.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
+                fontSize: 13,
+                height: 1.25,
               ),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 3),
 
             // Author
             Text(
               book.author,
-              style: theme.textTheme.bodySmall,
+              style: theme.textTheme.bodySmall?.copyWith(fontSize: 11),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
             const Spacer(),
 
-            // Footer: Total verses or rating
+            // Footer: Total verses or rating (with Expanded to prevent horizontal overflow)
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  book.totalVerses > 0 ? '${book.totalVerses} verses' : book.category,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.saffronPrimary,
+                Expanded(
+                  child: Text(
+                    book.totalVerses > 0 ? '${book.totalVerses} verses' : book.category,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.saffronPrimary,
+                      fontSize: 11,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
+                const SizedBox(width: 4),
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    const Icon(Icons.star_rounded, size: 16, color: AppColors.vedicGold),
+                    const Icon(Icons.star_rounded, size: 14, color: AppColors.vedicGold),
                     const SizedBox(width: 2),
                     Text(
                       book.rating.toStringAsFixed(1),
                       style: theme.textTheme.bodySmall?.copyWith(
                         fontWeight: FontWeight.w600,
+                        fontSize: 11,
                       ),
                     ),
                   ],
