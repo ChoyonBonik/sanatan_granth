@@ -17,22 +17,22 @@ class ContributionStatusBadge extends StatelessWidget {
       case ContributionStatus.pending:
         bg = Colors.amber.withAlpha(40);
         fg = Colors.orange[800]!;
-        label = 'অপেক্ষমাণ';
+        label = 'PENDING REVIEW';
         break;
       case ContributionStatus.underReview:
         bg = Colors.blue.withAlpha(40);
         fg = Colors.blue[700]!;
-        label = 'পর্যালোচনাধীন';
+        label = 'UNDER REVIEW';
         break;
       case ContributionStatus.approved:
         bg = AppColors.tulsiGreen.withAlpha(40);
         fg = AppColors.tulsiGreen;
-        label = 'অনুমোদিত ও প্রকাশিত';
+        label = 'APPROVED & PUBLISHED';
         break;
       case ContributionStatus.rejected:
         bg = Colors.red.withAlpha(40);
         fg = Colors.red[700]!;
-        label = 'সংশোধন প্রয়োজন';
+        label = 'CHANGES REQUESTED';
         break;
     }
 

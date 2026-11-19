@@ -33,16 +33,16 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('সনাতন গ্রন্থ'),
+        title: const Text('Sanatan Granth'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.search_rounded),
-            tooltip: 'শাস্ত্র অনুসন্ধান',
+            tooltip: 'Search Scriptures',
             onPressed: () => context.push('/search'),
           ),
           IconButton(
             icon: const Icon(Icons.palette_outlined),
-            tooltip: 'পঠন থিম',
+            tooltip: 'Reading Theme',
             onPressed: () => _showThemePicker(context),
           ),
         ],
@@ -97,15 +97,15 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          state.selectedCategory == 'সকল গ্রন্থ' || state.selectedCategory == 'All'
-                              ? 'পবিত্র শাস্ত্রমালা'
+                          state.selectedCategory == 'All' || state.selectedCategory == 'সকল গ্রন্থ'
+                              ? 'Sacred Scriptures'
                               : state.selectedCategory,
                           style: theme.textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          '${state.books.length}টি গ্রন্থ',
+                          '${state.books.length} Books',
                           style: theme.textTheme.bodySmall,
                         ),
                       ],
@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                   const SliverFillRemaining(
                     hasScrollBody: false,
                     child: Center(
-                      child: Text('এই বিভাগে কোনো গ্রন্থ পাওয়া যায়নি।'),
+                      child: Text('No scriptures found in this category.'),
                     ),
                   )
                 else
@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'পঠন থিম নির্বাচন',
+                      'Select Reading Theme',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -180,24 +180,24 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(height: 16),
                     _buildThemeTile(
                       ctx,
-                      title: 'উষ্ণ ভুর্জপত্র (সেপিয়া)',
-                      subtitle: 'দীর্ঘ সময় স্বস্তিদায়ক পাঠের জন্য প্রাচীন পাণ্ডুলিপি রূপ',
+                      title: 'Warm Sepia (Vedic Parchment)',
+                      subtitle: 'Gentle on eyes, inspired by ancient palm-leaf manuscripts',
                       mode: AppThemeMode.sepia,
                       current: themeState.themeMode,
                       color: AppColors.sepiaBackground,
                     ),
                     _buildThemeTile(
                       ctx,
-                      title: 'উজ্জ্বল দিন',
-                      subtitle: 'দিনের আলোয় পাঠের জন্য পরিচ্ছন্ন শ্বেত রূপরেখা',
+                      title: 'Pure Light',
+                      subtitle: 'Clean, crisp presentation for bright daylight environments',
                       mode: AppThemeMode.light,
                       current: themeState.themeMode,
                       color: AppColors.lightBackground,
                     ),
                     _buildThemeTile(
                       ctx,
-                      title: 'অ্যামোলেড ডার্ক (নিখুঁত কালো)',
-                      subtitle: 'রাতের নীরব সাধনা ও পাঠের জন্য অক্ষিরক্ষাকারী অন্ধকার রূপ',
+                      title: 'AMOLED Dark (Pure Black)',
+                      subtitle: 'Deep contrast for nighttime contemplation and reading',
                       mode: AppThemeMode.amoledDark,
                       current: themeState.themeMode,
                       color: AppColors.amoledBackground,

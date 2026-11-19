@@ -30,20 +30,20 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('গ্রন্থ বিবরণ'),
+        title: const Text('Book Details'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.bookmark_border_rounded),
-            tooltip: 'বুকমার্কে রাখুন',
+            tooltip: 'Bookmark',
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('গ্রন্থটি বুকমার্কে সংরক্ষিত হয়েছে')),
+                const SnackBar(content: Text('Book added to bookmarks')),
               );
             },
           ),
           IconButton(
             icon: const Icon(Icons.share_outlined),
-            tooltip: 'শেয়ার করুন',
+            tooltip: 'Share',
             onPressed: () {},
           ),
         ],
@@ -59,14 +59,14 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
           }
 
           if (book == null) {
-            return const Center(child: Text('শাস্ত্রটি খুঁজে পাওয়া যায়নি।'));
+            return const Center(child: Text('Scripture not found.'));
           }
 
-          String formatLabel = 'শ্লোকপাঠ';
+          String formatLabel = 'Verse Reader';
           if (book.format == BookFormat.pdf) {
-            formatLabel = 'পিডিএফ রূপ';
+            formatLabel = 'PDF Document';
           } else if (book.format == BookFormat.epub) {
-            formatLabel = 'ইপাব';
+            formatLabel = 'EPUB';
           }
 
           return SingleChildScrollView(
@@ -131,7 +131,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                           ),
                           const SizedBox(height: 6),
                           Text(
-                            'রচয়িতা: ${book.author}',
+                            'Author: ${book.author}',
                             style: theme.textTheme.bodyMedium?.copyWith(
                               color: AppColors.saffronPrimary,
                               fontWeight: FontWeight.w600,
@@ -171,8 +171,8 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                       child: ElevatedButton.icon(
                         icon: const Icon(Icons.menu_book_rounded),
                         label: Text(book.format == BookFormat.pdf
-                            ? 'পিডিএফ পড়ুন'
-                            : 'শ্লোক পাঠ করুন'),
+                            ? 'Read PDF'
+                            : 'Read Verses'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.saffronPrimary,
                           foregroundColor: Colors.white,
@@ -193,7 +193,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                     const SizedBox(width: 12),
                     OutlinedButton.icon(
                       icon: const Icon(Icons.download_rounded),
-                      label: const Text('সংরক্ষণ'),
+                      label: const Text('Download'),
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 14),
@@ -204,7 +204,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                       onPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('"${book.title}" অফলাইন পাঠের জন্য ডাউনলোড করা হচ্ছে...'),
+                            content: Text('Downloading "${book.title}" for offline reading...'),
                           ),
                         );
                       },
@@ -216,7 +216,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
 
                 // Description
                 Text(
-                  'গ্রন্থ পরিচিতি ও মাহাত্ম্য',
+                  'Overview & Spiritual Significance',
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -241,11 +241,11 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                   ),
                   child: Column(
                     children: <Widget>[
-                      _metaRow('ভাষা', book.language),
+                      _metaRow('Language', book.language),
                       const Divider(height: 20),
-                      _metaRow('মোট শ্লোক সংখ্যা', book.totalVerses > 0 ? '${book.totalVerses}টি' : 'উপলব্ধ নয়'),
+                      _metaRow('Total Verses', book.totalVerses > 0 ? '${book.totalVerses}' : 'N/A'),
                       const Divider(height: 20),
-                      _metaRow('পাঠের ফরম্যাট', formatLabel),
+                      _metaRow('Format', formatLabel),
                     ],
                   ),
                 ),

@@ -37,8 +37,8 @@ class AppTheme {
       colorScheme: colorScheme,
       cardColor: AppColors.sepiaSurface,
       dividerColor: AppColors.sepiaBorder,
-      fontFamily: GoogleFonts.hindSiliguri().fontFamily,
-      textTheme: _buildBengaliTextTheme(
+      fontFamily: GoogleFonts.inter().fontFamily,
+      textTheme: _buildAppTextTheme(
         baseColor: AppColors.sepiaTextPrimary,
         secondaryColor: AppColors.sepiaTextSecondary,
       ),
@@ -48,16 +48,16 @@ class AppTheme {
         scrolledUnderElevation: 1,
         centerTitle: true,
         iconTheme: const IconThemeData(color: AppColors.sepiaTextPrimary),
-        titleTextStyle: AppTypography.bengaliTitle.copyWith(
+        titleTextStyle: AppTypography.englishTitle.copyWith(
           color: AppColors.sepiaTextPrimary,
-          fontSize: 21,
+          fontSize: 20,
         ),
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.sepiaSurface,
         indicatorColor: AppColors.saffronPrimary.withAlpha(50),
         labelTextStyle: WidgetStateProperty.all(
-          AppTypography.bengaliUi.copyWith(
+          AppTypography.englishUi.copyWith(
             fontSize: 12,
             fontWeight: FontWeight.w600,
             color: AppColors.sepiaTextPrimary,
@@ -110,8 +110,8 @@ class AppTheme {
       colorScheme: colorScheme,
       cardColor: AppColors.lightSurface,
       dividerColor: AppColors.lightBorder,
-      fontFamily: GoogleFonts.hindSiliguri().fontFamily,
-      textTheme: _buildBengaliTextTheme(
+      fontFamily: GoogleFonts.inter().fontFamily,
+      textTheme: _buildAppTextTheme(
         baseColor: AppColors.lightTextPrimary,
         secondaryColor: AppColors.lightTextSecondary,
       ),
@@ -121,16 +121,16 @@ class AppTheme {
         scrolledUnderElevation: 1,
         centerTitle: true,
         iconTheme: const IconThemeData(color: AppColors.lightTextPrimary),
-        titleTextStyle: AppTypography.bengaliTitle.copyWith(
+        titleTextStyle: AppTypography.englishTitle.copyWith(
           color: AppColors.lightTextPrimary,
-          fontSize: 21,
+          fontSize: 20,
         ),
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.lightSurface,
         indicatorColor: AppColors.saffronPrimary.withAlpha(40),
         labelTextStyle: WidgetStateProperty.all(
-          AppTypography.bengaliUi.copyWith(
+          AppTypography.englishUi.copyWith(
             fontSize: 12,
             fontWeight: FontWeight.w600,
             color: AppColors.lightTextPrimary,
@@ -161,7 +161,7 @@ class AppTheme {
   }
 
   // ---------------------------------------------------------------------------
-  // 3. AMOLED DARK THEME (অ্যামোলেড ডার্ক / নিখুঁত কালো)
+  // 3. AMOLED DARK THEME (Pure Black)
   // ---------------------------------------------------------------------------
   static ThemeData get amoledDarkTheme {
     const ColorScheme colorScheme = ColorScheme(
@@ -183,8 +183,8 @@ class AppTheme {
       colorScheme: colorScheme,
       cardColor: AppColors.amoledSurface,
       dividerColor: AppColors.amoledBorder,
-      fontFamily: GoogleFonts.hindSiliguri().fontFamily,
-      textTheme: _buildBengaliTextTheme(
+      fontFamily: GoogleFonts.inter().fontFamily,
+      textTheme: _buildAppTextTheme(
         baseColor: AppColors.amoledTextPrimary,
         secondaryColor: AppColors.amoledTextSecondary,
       ),
@@ -194,16 +194,16 @@ class AppTheme {
         scrolledUnderElevation: 1,
         centerTitle: true,
         iconTheme: const IconThemeData(color: AppColors.amoledTextPrimary),
-        titleTextStyle: AppTypography.bengaliTitle.copyWith(
+        titleTextStyle: AppTypography.englishTitle.copyWith(
           color: AppColors.amoledTextPrimary,
-          fontSize: 21,
+          fontSize: 20,
         ),
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.amoledSurface,
         indicatorColor: AppColors.saffronPrimary.withAlpha(60),
         labelTextStyle: WidgetStateProperty.all(
-          AppTypography.bengaliUi.copyWith(
+          AppTypography.englishUi.copyWith(
             fontSize: 12,
             fontWeight: FontWeight.w600,
             color: AppColors.amoledTextPrimary,
@@ -233,54 +233,54 @@ class AppTheme {
     );
   }
 
-  static TextTheme _buildBengaliTextTheme({
+  static TextTheme _buildAppTextTheme({
     required Color baseColor,
     required Color secondaryColor,
   }) {
     return TextTheme(
-      headlineLarge: GoogleFonts.notoSerifBengali(
+      headlineLarge: GoogleFonts.cinzel(
         fontSize: 30,
         fontWeight: FontWeight.bold,
         color: baseColor,
       ),
-      headlineMedium: GoogleFonts.notoSerifBengali(
+      headlineMedium: GoogleFonts.cinzel(
         fontSize: 24,
         fontWeight: FontWeight.w700,
         color: baseColor,
       ),
-      headlineSmall: GoogleFonts.notoSerifBengali(
+      headlineSmall: GoogleFonts.cinzel(
         fontSize: 20,
         fontWeight: FontWeight.w600,
         color: baseColor,
       ),
-      titleLarge: GoogleFonts.hindSiliguri(
+      titleLarge: GoogleFonts.inter(
         fontSize: 18,
         fontWeight: FontWeight.w600,
         color: baseColor,
       ),
-      titleMedium: GoogleFonts.hindSiliguri(
+      titleMedium: GoogleFonts.inter(
         fontSize: 16,
         fontWeight: FontWeight.w600,
         color: baseColor,
       ),
-      titleSmall: GoogleFonts.hindSiliguri(
+      titleSmall: GoogleFonts.inter(
         fontSize: 14,
         fontWeight: FontWeight.w600,
         color: secondaryColor,
       ),
-      bodyLarge: GoogleFonts.tiroBangla(
+      bodyLarge: GoogleFonts.lora(
         fontSize: 16,
         fontWeight: FontWeight.w400,
-        height: 1.65,
+        height: 1.6,
         color: baseColor,
       ),
-      bodyMedium: GoogleFonts.tiroBangla(
+      bodyMedium: GoogleFonts.lora(
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        height: 1.55,
+        height: 1.5,
         color: secondaryColor,
       ),
-      bodySmall: GoogleFonts.hindSiliguri(
+      bodySmall: GoogleFonts.inter(
         fontSize: 12,
         fontWeight: FontWeight.w400,
         color: secondaryColor,

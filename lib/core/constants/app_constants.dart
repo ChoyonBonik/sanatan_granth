@@ -2,8 +2,8 @@
 class AppConstants {
   AppConstants._();
 
-  static const String appName = 'সনাতন গ্রন্থ';
-  static const String appTagline = 'শাশ্বত বৈদিক জ্ঞান ও অমূল্য শাস্ত্র ভাণ্ডার';
+  static const String appName = 'Sanatan Granth';
+  static const String appTagline = 'Read, listen to, and preserve sacred Hindu scriptures.';
 
   // Supabase Configuration (Configure via environment / secrets)
   static const String supabaseUrl = String.fromEnvironment(
@@ -27,18 +27,18 @@ class AppConstants {
   static const String versesTable = 'verses';
   static const String contributionsTable = 'contributions';
 
-  // Primary Canonical Categories in Bengali
+  // Primary Canonical Categories
   static const List<String> canonicalCategories = <String>[
-    'সকল গ্রন্থ',
-    'শ্রীমদ্ভগবদ্গীতা',
-    'উপনিষদ',
-    'শ্রীমদ্ভাগবতম্',
-    'বেদ ও সংহিতা',
-    'পুরাণ ও ইতিহাস',
-    'রামায়ণ',
-    'মহাভারত',
-    'দর্শন ও বেদান্ত',
-    'স্তোত্র ও সূক্তাবলী',
-    'শ্রীচৈতন্যচরিতামৃত',
+    'All',
+    'Bhagavad Gita',
+    'Upanishads',
+    'Srimad Bhagavatam',
+    'Vedas & Samhitas',
+    'Puranas & Itihasas',
+    'Ramayana',
+    'Mahabharata',
+    'Darshanas & Vedanta',
+    'Stotras & Prayers',
+    'Chaitanya Charitamrita',
   ];
 }

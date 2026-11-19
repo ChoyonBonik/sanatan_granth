@@ -56,14 +56,14 @@ class _StructuredVerseReaderPageState extends State<StructuredVerseReaderPage> {
       builder: (BuildContext context, ThemeState themeState) {
         return Scaffold(
           appBar: AppBar(
-            title: Text('অধ্যায় ${widget.initialChapter}: সাংখ্যযোগ'),
+            title: Text('Chapter ${widget.initialChapter}: Sankhya Yoga'),
             actions: <Widget>[
               IconButton(
                 icon: Icon(
                   _showAudioPlayer ? Icons.headphones : Icons.headphones_outlined,
                   color: _showAudioPlayer ? AppColors.saffronPrimary : null,
                 ),
-                tooltip: 'অডিও সুললিত আবৃত্তি',
+                tooltip: 'Audio Sync Player',
                 onPressed: () {
                   setState(() {
                     _showAudioPlayer = !_showAudioPlayer;
@@ -72,7 +72,7 @@ class _StructuredVerseReaderPageState extends State<StructuredVerseReaderPage> {
               ),
               IconButton(
                 icon: const Icon(Icons.tune_rounded),
-                tooltip: 'পঠন পছন্দসমূহ',
+                tooltip: 'Reader Settings',
                 onPressed: () => showDialog<void>(
                   context: context,
                   builder: (BuildContext ctx) => const ReaderSettingsDialog(),
@@ -85,7 +85,7 @@ class _StructuredVerseReaderPageState extends State<StructuredVerseReaderPage> {
                   isPlaying: _isPlayingAudio,
                   position: _audioPosition,
                   duration: _audioDuration,
-                  title: 'শ্রীমদ্ভগবদ্গীতা — অধ্যায় ${widget.initialChapter} সুললিত আবৃত্তি',
+                  title: 'Bhagavad Gita — Chapter ${widget.initialChapter} Recitation',
                   onPlayPause: () {
                     setState(() {
                       _isPlayingAudio = !_isPlayingAudio;
@@ -115,7 +115,7 @@ class _StructuredVerseReaderPageState extends State<StructuredVerseReaderPage> {
 
               if (state.status == ReaderStatus.error) {
                 return Center(
-                  child: Text(state.errorMessage ?? 'শ্লোকসমূহ লোড করা সম্ভব হয়নি।'),
+                  child: Text(state.errorMessage ?? 'Failed to load verses.'),
                 );
               }
 

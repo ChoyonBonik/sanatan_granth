@@ -17,11 +17,11 @@ class BookCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
-    String formatLabel = 'শ্লোক';
+    String formatLabel = 'VERSE';
     if (book.format == BookFormat.pdf) {
-      formatLabel = 'পিডিএফ';
+      formatLabel = 'PDF';
     } else if (book.format == BookFormat.epub) {
-      formatLabel = 'ইপাব';
+      formatLabel = 'EPUB';
     }
 
     return InkWell(
@@ -132,7 +132,7 @@ class BookCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  book.totalVerses > 0 ? '${book.totalVerses}টি শ্লোক' : book.category,
+                  book.totalVerses > 0 ? '${book.totalVerses} verses' : book.category,
                   style: theme.textTheme.bodySmall?.copyWith(
                     fontWeight: FontWeight.w600,
                     color: AppColors.saffronPrimary,

@@ -35,13 +35,13 @@ class _UploadCsvVersesPageState extends State<UploadCsvVersesPage> {
   void _submit() {
     if (_titleController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('অনুগ্রহ করে শাস্ত্রের নাম ও অধ্যায় লিখুন')),
+        const SnackBar(content: Text('Please enter scripture title and chapter')),
       );
       return;
     }
     if (_csvController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('অনুগ্রহ করে সিএসভি বা শ্লোক তথ্য লিখুন')),
+        const SnackBar(content: Text('Please enter CSV or JSON verses')),
       );
       return;
     }
@@ -66,7 +66,7 @@ class _UploadCsvVersesPageState extends State<UploadCsvVersesPage> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text('কাঠামোগত শ্লোক আপলোডার')),
+        appBar: AppBar(title: const Text('Structured Verse CSV Uploader')),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
           child: Column(
@@ -75,8 +75,8 @@ class _UploadCsvVersesPageState extends State<UploadCsvVersesPage> {
               TextField(
                 controller: _titleController,
                 decoration: const InputDecoration(
-                  labelText: 'শাস্ত্রের নাম ও স্কন্ধ/অধ্যায় *',
-                  hintText: 'যেমন: শ্রীমদ্ভগবদ্গীতা - প্রথম অধ্যায়',
+                  labelText: 'Scripture Name & Canto/Chapter *',
+                  hintText: 'e.g. Srimad Bhagavad Gita - Chapter 1',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -86,12 +86,12 @@ class _UploadCsvVersesPageState extends State<UploadCsvVersesPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   const Text(
-                    'সিএসভি শ্লোক তথ্য (হেডার আবশ্যক)',
+                    'CSV Verse Data (Header required)',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextButton.icon(
                     icon: const Icon(Icons.refresh, size: 16),
-                    label: const Text('নমুনা পুনঃস্থাপন'),
+                    label: const Text('Reset Template'),
                     onPressed: () => _csvController.text = _templateCsv,
                   ),
                 ],
@@ -113,7 +113,7 @@ class _UploadCsvVersesPageState extends State<UploadCsvVersesPage> {
 
               ElevatedButton.icon(
                 icon: const Icon(Icons.cloud_upload_rounded),
-                label: const Text('যাচাই করে জমা দিন'),
+                label: const Text('Validate & Submit CSV'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.saffronPrimary,
                   foregroundColor: Colors.white,

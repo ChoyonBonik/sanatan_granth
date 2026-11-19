@@ -17,7 +17,7 @@ class ProfilePage extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('ভক্ত প্রোফাইল ও সেটিংস')),
+      appBar: AppBar(title: const Text('Devotee Profile & Settings')),
       body: BlocBuilder<AuthBloc, AuthState>(
         builder: (BuildContext context, AuthState authState) {
           final user = authState.user;
@@ -55,7 +55,7 @@ class ProfilePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            user?.displayName ?? 'সনাতন পাঠক',
+                            user?.displayName ?? 'Sanatan Devotee',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
@@ -76,7 +76,7 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 24),
 
               Text(
-                'পঠন ও প্রদর্শন',
+                'Reading & Display',
                 style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
@@ -88,7 +88,7 @@ class ProfilePage extends StatelessWidget {
                       children: <Widget>[
                         ListTile(
                           leading: const Icon(Icons.palette_outlined, color: AppColors.saffronPrimary),
-                          title: const Text('থিম রূপরেখা'),
+                          title: const Text('Theme Mode'),
                           subtitle: Text(_getThemeName(themeState.themeMode)),
                           trailing: const Icon(Icons.chevron_right),
                           onTap: () => _pickTheme(context),
@@ -96,7 +96,7 @@ class ProfilePage extends StatelessWidget {
                         const Divider(height: 1),
                         ListTile(
                           leading: const Icon(Icons.format_size_rounded, color: AppColors.saffronPrimary),
-                          title: const Text('অক্ষরের মাপ'),
+                          title: const Text('Font Scale Factor'),
                           subtitle: Text('${(themeState.fontScale * 100).toInt()}%'),
                           trailing: const Icon(Icons.chevron_right),
                           onTap: () => _showFontScaleDialog(context, themeState.fontScale),
@@ -110,7 +110,7 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 24),
 
               Text(
-                'অ্যাকাউন্ট',
+                'Account',
                 style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
@@ -120,14 +120,14 @@ class ProfilePage extends StatelessWidget {
                   children: <Widget>[
                     ListTile(
                       leading: const Icon(Icons.favorite_border, color: AppColors.saffronPrimary),
-                      title: const Text('বুকমার্ক ও প্রিয় শ্লোকাবলী'),
+                      title: const Text('Bookmarks & Favorite Verses'),
                       trailing: const Icon(Icons.chevron_right),
                       onTap: () {},
                     ),
                     const Divider(height: 1),
                     ListTile(
                       leading: const Icon(Icons.logout_rounded, color: Colors.red),
-                      title: const Text('লগআউট', style: TextStyle(color: Colors.red)),
+                      title: const Text('Sign Out', style: TextStyle(color: Colors.red)),
                       onTap: () {
                         context.read<AuthBloc>().add(SignOutEvent());
                         context.go('/login');
@@ -146,13 +146,13 @@ class ProfilePage extends StatelessWidget {
   String _getThemeName(AppThemeMode mode) {
     switch (mode) {
       case AppThemeMode.sepia:
-        return 'সেপিয়া';
+        return 'Warm Sepia';
       case AppThemeMode.light:
-        return 'উজ্জ্বল';
+        return 'Pure Light';
       case AppThemeMode.amoledDark:
-        return 'অ্যামোলেড ডার্ক';
+        return 'AMOLED Dark';
       case AppThemeMode.system:
-        return 'সিস্টেম ডিফল্ট';
+        return 'System Default';
     }
   }
 
@@ -165,21 +165,21 @@ class ProfilePage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                title: const Text('উষ্ণ সেপিয়া (বৈদিক পত্র)'),
+                title: const Text('Warm Sepia (Vedic Parchment)'),
                 onTap: () {
                   context.read<ThemeCubit>().setThemeMode(AppThemeMode.sepia);
                   Navigator.pop(ctx);
                 },
               ),
               ListTile(
-                title: const Text('উজ্জ্বল শুভ্র (লাইট)'),
+                title: const Text('Pure Light'),
                 onTap: () {
                   context.read<ThemeCubit>().setThemeMode(AppThemeMode.light);
                   Navigator.pop(ctx);
                 },
               ),
               ListTile(
-                title: const Text('অ্যামোলেড ডার্ক (গভীর কৃষ্ণ)'),
+                title: const Text('AMOLED Dark (Pure Black)'),
                 onTap: () {
                   context.read<ThemeCubit>().setThemeMode(AppThemeMode.amoledDark);
                   Navigator.pop(ctx);
@@ -200,7 +200,7 @@ class ProfilePage extends StatelessWidget {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
-              title: const Text('অক্ষরের মাপ নির্ধারণ'),
+              title: const Text('Adjust Font Scale'),
               content: Slider(
                 value: val,
                 min: 0.8,
@@ -214,7 +214,7 @@ class ProfilePage extends StatelessWidget {
               ),
               actions: <Widget>[
                 TextButton(
-                  child: const Text('সম্পন্ন'),
+                  child: const Text('Done'),
                   onPressed: () => Navigator.pop(ctx),
                 ),
               ],

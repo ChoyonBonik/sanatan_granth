@@ -128,11 +128,11 @@ class AppTypography {
       );
     }
 
-    return GoogleFonts.tiroBangla(
+    return GoogleFonts.lora(
       fontSize: fontSize,
       fontWeight: fontWeight,
       color: color,
-      height: height ?? 1.65,
+      height: height ?? 1.6,
     );
   }
 }

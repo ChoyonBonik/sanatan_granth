@@ -42,21 +42,21 @@ class ScripturalBanner extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Text(
-                  'দৈনিক অমৃতবাণী',
+                  'VERSE OF THE DAY',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 12,
+                    fontSize: 11,
                     fontWeight: FontWeight.bold,
-                    letterSpacing: 0.5,
+                    letterSpacing: 0.8,
                   ),
                 ),
               ),
               const Spacer(),
               const Text(
-                'গীতা ২.৪৭',
+                'Gita 2.47',
                 style: TextStyle(
                   color: Colors.white70,
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -87,7 +87,7 @@ class ScripturalBanner extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: onExplore,
               icon: const Icon(Icons.menu_book_rounded, size: 16),
-              label: const Text('গীতা পাঠ করুন'),
+              label: const Text('Read Gita'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: AppColors.saffronDeep,

@@ -151,22 +151,22 @@ class ScaffoldWithNavBar extends StatelessWidget {
           NavigationDestination(
             icon: Icon(Icons.menu_book_outlined),
             selectedIcon: Icon(Icons.menu_book_rounded),
-            label: 'গ্রন্থাগার',
+            label: 'Library',
           ),
           NavigationDestination(
             icon: Icon(Icons.offline_pin_outlined),
             selectedIcon: Icon(Icons.offline_pin_rounded),
-            label: 'অফলাইন',
+            label: 'Offline',
           ),
           NavigationDestination(
             icon: Icon(Icons.volunteer_activism_outlined),
             selectedIcon: Icon(Icons.volunteer_activism_rounded),
-            label: 'সেবা',
+            label: 'Contribute',
           ),
           NavigationDestination(
             icon: Icon(Icons.person_outline_rounded),
             selectedIcon: Icon(Icons.person_rounded),
-            label: 'প্রোফাইল',
+            label: 'Profile',
           ),
         ],
       ),
