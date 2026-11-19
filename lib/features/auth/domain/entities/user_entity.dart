@@ -6,6 +6,7 @@ class UserEntity extends Equatable {
   final String displayName;
   final String? photoUrl;
   final bool isScholar;
+  final bool isGuest;
   final DateTime? createdAt;
 
   const UserEntity({
@@ -14,8 +15,16 @@ class UserEntity extends Equatable {
     required this.displayName,
     this.photoUrl,
     this.isScholar = false,
+    this.isGuest = false,
     this.createdAt,
   });
+
+  factory UserEntity.guest() => const UserEntity(
+        id: 'guest-devotee',
+        email: '',
+        displayName: 'Guest Devotee',
+        isGuest: true,
+      );
 
   @override
   List<Object?> get props => <Object?>[
@@ -24,6 +33,7 @@ class UserEntity extends Equatable {
         displayName,
         photoUrl,
         isScholar,
+        isGuest,
         createdAt,
       ];
 }

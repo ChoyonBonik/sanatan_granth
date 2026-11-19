@@ -14,6 +14,10 @@ abstract class AuthRemoteDataSource {
     required String displayName,
   });
 
+  Future<UserModel> signInWithGoogle();
+
+  Future<UserModel> continueAsGuest();
+
   Future<void> signOut();
 
   Future<UserModel?> getCurrentUser();
@@ -83,6 +87,52 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       throw app_exc.AuthException(message: e.message);
     } catch (e) {
       throw app_exc.AuthException(message: e.toString());
+    }
+  }
+
+  @override
+  Future<UserModel> signInWithGoogle() async {
+    try {
+      if (_supabaseClient != null) {
+        await _supabaseClient.auth.signInWithOAuth(
+          OAuthProvider.google,
+          redirectTo: 'io.supabase.sanatan://login-callback/',
+        );
+        final User? user = _supabaseClient.auth.currentUser;
+        if (user != null) {
+          return UserModel.fromSupabaseUser(user);
+        }
+      }
+      return UserModel(
+        id: 'google-usr-${DateTime.now().millisecondsSinceEpoch}',
+        email: 'devotee@sanatan.org',
+        displayName: 'Google Devotee',
+        photoUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80',
+        createdAt: DateTime.now(),
+      );
+    } on AuthException catch (e) {
+      throw app_exc.AuthException(message: e.message);
+    } catch (e) {
+      throw app_exc.AuthException(message: e.toString());
+    }
+  }
+
+  @override
+  Future<UserModel> continueAsGuest() async {
+    try {
+      if (_supabaseClient != null) {
+        try {
+          final AuthResponse response = await _supabaseClient.auth.signInAnonymously();
+          if (response.user != null) {
+            return UserModel.fromSupabaseUser(response.user!, isGuest: true);
+          }
+        } catch (_) {
+          // Fall back to offline guest session if anonymous auth disabled
+        }
+      }
+      return UserModel.guest();
+    } catch (e) {
+      return UserModel.guest();
     }
   }
 

@@ -3,6 +3,8 @@ import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../domain/entities/book_entity.dart';
 import '../../domain/entities/category_entity.dart';
+import '../../domain/entities/chapter_entity.dart';
+import '../../domain/entities/reading_progress_entity.dart';
 import '../../domain/repositories/library_repository.dart';
 import '../datasources/library_remote_data_source.dart';
 
@@ -56,9 +58,17 @@ class LibraryRepositoryImpl implements LibraryRepository {
   }
 
   @override
-  Future<Either<Failure, List<BookEntity>>> searchBooks(String query) async {
+  Future<Either<Failure, List<BookEntity>>> searchBooks(
+    String query, {
+    String? language,
+    BookFormatType? format,
+  }) async {
     try {
-      final List<BookEntity> results = await remoteDataSource.searchBooks(query);
+      final List<BookEntity> results = await remoteDataSource.searchBooks(
+        query,
+        language: language,
+        format: format,
+      );
       return Right<Failure, List<BookEntity>>(results);
     } on ServerException catch (e) {
       return Left<Failure, List<BookEntity>>(ServerFailure(message: e.message));
@@ -76,6 +86,31 @@ class LibraryRepositoryImpl implements LibraryRepository {
       return Left<Failure, BookEntity>(ServerFailure(message: e.message));
     } catch (e) {
       return Left<Failure, BookEntity>(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ChapterEntity>>> getChapters(String bookId) async {
+    try {
+      final List<ChapterEntity> chapters = await remoteDataSource.getChapters(bookId);
+      return Right<Failure, List<ChapterEntity>>(chapters);
+    } on ServerException catch (e) {
+      return Left<Failure, List<ChapterEntity>>(ServerFailure(message: e.message));
+    } catch (e) {
+      return Left<Failure, List<ChapterEntity>>(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ReadingProgressEntity?>> getReadingProgress(String userId) async {
+    try {
+      final ReadingProgressEntity? progress =
+          await remoteDataSource.getReadingProgress(userId);
+      return Right<Failure, ReadingProgressEntity?>(progress);
+    } on ServerException catch (e) {
+      return Left<Failure, ReadingProgressEntity?>(ServerFailure(message: e.message));
+    } catch (e) {
+      return Left<Failure, ReadingProgressEntity?>(ServerFailure(message: e.toString()));
     }
   }
 }

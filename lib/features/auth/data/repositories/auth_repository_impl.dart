@@ -49,6 +49,30 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Either<Failure, UserEntity>> signInWithGoogle() async {
+    try {
+      final UserEntity user = await remoteDataSource.signInWithGoogle();
+      return Right<Failure, UserEntity>(user);
+    } on AuthException catch (e) {
+      return Left<Failure, UserEntity>(AuthFailure(message: e.message));
+    } catch (e) {
+      return Left<Failure, UserEntity>(AuthFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> continueAsGuest() async {
+    try {
+      final UserEntity user = await remoteDataSource.continueAsGuest();
+      return Right<Failure, UserEntity>(user);
+    } on AuthException catch (e) {
+      return Left<Failure, UserEntity>(AuthFailure(message: e.message));
+    } catch (e) {
+      return Left<Failure, UserEntity>(AuthFailure(message: e.toString()));
+    }
+  }
+
+  @override
   Future<Either<Failure, void>> signOut() async {
     try {
       await remoteDataSource.signOut();

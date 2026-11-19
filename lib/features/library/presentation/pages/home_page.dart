@@ -11,6 +11,7 @@ import '../bloc/library_event.dart';
 import '../bloc/library_state.dart';
 import '../widgets/book_card.dart';
 import '../widgets/category_chip_bar.dart';
+import '../widgets/continue_reading_card.dart';
 import '../widgets/scriptural_banner.dart';
 
 class HomePage extends StatefulWidget {
@@ -64,16 +65,34 @@ class _HomePageState extends State<HomePage> {
               slivers: <Widget>[
                 const SliverToBoxAdapter(child: SizedBox(height: 12)),
 
-                // Daily Shloka Banner
+                // Horizontal "Continue Reading / Listening" Resume Card
+                SliverToBoxAdapter(
+                  child: ContinueReadingCard(
+                    book: state.readingProgressBook,
+                    progress: state.readingProgress,
+                  ),
+                ),
+
+                const SliverToBoxAdapter(child: SizedBox(height: 18)),
+
+                // Featured Scriptures Banner Carousel
                 SliverToBoxAdapter(
                   child: ScripturalBanner(
+                    featuredBooks: state.featuredBooks,
+                    onBookSelected: (BookEntity book) {
+                      if (book.format == BookFormat.pdf) {
+                        context.push('/reader/pdf/${book.id}');
+                      } else {
+                        context.push('/reader/structured/${book.id}');
+                      }
+                    },
                     onExplore: () => context.push('/reader/structured/gita-as-it-is'),
                   ),
                 ),
 
                 const SliverToBoxAdapter(child: SizedBox(height: 20)),
 
-                // Category Filter Bar
+                // Category Filter Bar (All, Gita, Upanishads, Vedas, Puranas, Itihasa, Stotras)
                 if (state.categories.isNotEmpty)
                   SliverToBoxAdapter(
                     child: CategoryChipBar(

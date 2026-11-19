@@ -1,9 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../auth/presentation/bloc/auth_bloc.dart';
 
 class ContributeDashboardPage extends StatelessWidget {
   const ContributeDashboardPage({super.key});
+
+  void _navigateIfAuthenticated(BuildContext context, String route) {
+    final authState = context.read<AuthBloc>().state;
+    if (authState.user == null || authState.user!.isGuest) {
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext ctx) => AlertDialog(
+          title: const Row(
+            children: <Widget>[
+              Icon(Icons.volunteer_activism_rounded, color: AppColors.saffronPrimary),
+              SizedBox(width: 8),
+              Text('Sign In for Seva'),
+            ],
+          ),
+          content: const Text(
+            'To maintain scholarly integrity and attribute scripture contributions, devotees must sign in before submitting books or verses.',
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () => Navigator.pop(ctx),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.saffronPrimary,
+                foregroundColor: Colors.white,
+              ),
+              child: const Text('Sign In Now'),
+              onPressed: () {
+                Navigator.pop(ctx);
+                context.push('/login');
+              },
+            ),
+          ],
+        ),
+      );
+    } else {
+      context.push(route);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +87,7 @@ class ContributeDashboardPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton.icon(
-                  onPressed: () => context.push('/contribute/tracker'),
+                  onPressed: () => _navigateIfAuthenticated(context, '/contribute/tracker'),
                   icon: const Icon(Icons.history_rounded, size: 18),
                   label: const Text('My Submissions & Status'),
                   style: ElevatedButton.styleFrom(
@@ -73,7 +115,7 @@ class ContributeDashboardPage extends StatelessWidget {
             title: 'Upload Book (PDF / EPUB)',
             subtitle:
                 'Submit high-quality scanned scriptures, rare commentaries, or authentic digital books.',
-            onTap: () => context.push('/contribute/upload-document'),
+            onTap: () => _navigateIfAuthenticated(context, '/contribute/upload-document'),
           ),
 
           const SizedBox(height: 14),
@@ -84,7 +126,7 @@ class ContributeDashboardPage extends StatelessWidget {
             title: 'Structured Verse CSV / JSON Uploader',
             subtitle:
                 'Upload bulk slokas, word-for-word synonyms, Bengali translation, and purports via CSV.',
-            onTap: () => context.push('/contribute/upload-csv'),
+            onTap: () => _navigateIfAuthenticated(context, '/contribute/upload-csv'),
           ),
 
           const SizedBox(height: 14),
@@ -95,7 +137,7 @@ class ContributeDashboardPage extends StatelessWidget {
             title: 'Pending Status Tracker',
             subtitle:
                 'Monitor verification progress by our scholarly review committee and editorial team.',
-            onTap: () => context.push('/contribute/tracker'),
+            onTap: () => _navigateIfAuthenticated(context, '/contribute/tracker'),
           ),
         ],
       ),

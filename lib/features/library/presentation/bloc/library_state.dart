@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import '../../domain/entities/book_entity.dart';
 import '../../domain/entities/category_entity.dart';
+import '../../domain/entities/chapter_entity.dart';
+import '../../domain/entities/reading_progress_entity.dart';
 
 enum LibraryStatus { initial, loading, loaded, searching, searchLoaded, error }
 
@@ -12,7 +14,12 @@ class LibraryState extends Equatable {
   final List<BookEntity> searchResults;
   final String selectedCategory;
   final String searchQuery;
+  final String selectedLanguage;
+  final BookFormatType? selectedFormat;
   final BookEntity? selectedBook;
+  final List<ChapterEntity> bookChapters;
+  final ReadingProgressEntity? readingProgress;
+  final BookEntity? readingProgressBook;
   final String? errorMessage;
 
   const LibraryState({
@@ -23,7 +30,12 @@ class LibraryState extends Equatable {
     this.searchResults = const <BookEntity>[],
     this.selectedCategory = 'All',
     this.searchQuery = '',
+    this.selectedLanguage = 'All',
+    this.selectedFormat,
     this.selectedBook,
+    this.bookChapters = const <ChapterEntity>[],
+    this.readingProgress,
+    this.readingProgressBook,
     this.errorMessage,
   });
 
@@ -35,7 +47,13 @@ class LibraryState extends Equatable {
     List<BookEntity>? searchResults,
     String? selectedCategory,
     String? searchQuery,
+    String? selectedLanguage,
+    BookFormatType? selectedFormat,
+    bool clearFormat = false,
     BookEntity? selectedBook,
+    List<ChapterEntity>? bookChapters,
+    ReadingProgressEntity? readingProgress,
+    BookEntity? readingProgressBook,
     String? errorMessage,
   }) {
     return LibraryState(
@@ -46,7 +64,12 @@ class LibraryState extends Equatable {
       searchResults: searchResults ?? this.searchResults,
       selectedCategory: selectedCategory ?? this.selectedCategory,
       searchQuery: searchQuery ?? this.searchQuery,
+      selectedLanguage: selectedLanguage ?? this.selectedLanguage,
+      selectedFormat: clearFormat ? null : (selectedFormat ?? this.selectedFormat),
       selectedBook: selectedBook ?? this.selectedBook,
+      bookChapters: bookChapters ?? this.bookChapters,
+      readingProgress: readingProgress ?? this.readingProgress,
+      readingProgressBook: readingProgressBook ?? this.readingProgressBook,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
@@ -60,7 +83,12 @@ class LibraryState extends Equatable {
         searchResults,
         selectedCategory,
         searchQuery,
+        selectedLanguage,
+        selectedFormat,
         selectedBook,
+        bookChapters,
+        readingProgress,
+        readingProgressBook,
         errorMessage,
       ];
 }

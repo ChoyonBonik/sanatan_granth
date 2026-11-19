@@ -28,6 +28,8 @@ import '../../features/library/domain/repositories/library_repository.dart';
 import '../../features/library/domain/usecases/get_books_usecase.dart';
 import '../../features/library/domain/usecases/get_categories_usecase.dart';
 import '../../features/library/domain/usecases/get_book_details_usecase.dart';
+import '../../features/library/domain/usecases/get_chapters_usecase.dart';
+import '../../features/library/domain/usecases/get_reading_progress_usecase.dart';
 import '../../features/library/domain/usecases/search_books_usecase.dart';
 import '../../features/library/presentation/bloc/library_bloc.dart';
 
@@ -99,12 +101,20 @@ Future<void> initDependencies({SupabaseClient? supabaseClient}) async {
   sl.registerLazySingleton<GetCurrentUserUseCase>(
     () => GetCurrentUserUseCase(sl<AuthRepository>()),
   );
+  sl.registerLazySingleton<SignInWithGoogleUseCase>(
+    () => SignInWithGoogleUseCase(sl<AuthRepository>()),
+  );
+  sl.registerLazySingleton<ContinueAsGuestUseCase>(
+    () => ContinueAsGuestUseCase(sl<AuthRepository>()),
+  );
   sl.registerFactory<AuthBloc>(
     () => AuthBloc(
       signInUseCase: sl<SignInUseCase>(),
       signUpUseCase: sl<SignUpUseCase>(),
       signOutUseCase: sl<SignOutUseCase>(),
       getCurrentUserUseCase: sl<GetCurrentUserUseCase>(),
+      signInWithGoogleUseCase: sl<SignInWithGoogleUseCase>(),
+      continueAsGuestUseCase: sl<ContinueAsGuestUseCase>(),
     ),
   );
 
@@ -129,12 +139,20 @@ Future<void> initDependencies({SupabaseClient? supabaseClient}) async {
   sl.registerLazySingleton<GetBookDetailsUseCase>(
     () => GetBookDetailsUseCase(sl<LibraryRepository>()),
   );
+  sl.registerLazySingleton<GetChaptersUseCase>(
+    () => GetChaptersUseCase(sl<LibraryRepository>()),
+  );
+  sl.registerLazySingleton<GetReadingProgressUseCase>(
+    () => GetReadingProgressUseCase(sl<LibraryRepository>()),
+  );
   sl.registerFactory<LibraryBloc>(
     () => LibraryBloc(
       getCategoriesUseCase: sl<GetCategoriesUseCase>(),
       getBooksUseCase: sl<GetBooksUseCase>(),
       searchBooksUseCase: sl<SearchBooksUseCase>(),
       getBookDetailsUseCase: sl<GetBookDetailsUseCase>(),
+      getChaptersUseCase: sl<GetChaptersUseCase>(),
+      getReadingProgressUseCase: sl<GetReadingProgressUseCase>(),
     ),
   );
 

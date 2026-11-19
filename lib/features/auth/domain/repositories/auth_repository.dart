@@ -14,6 +14,10 @@ abstract class AuthRepository {
     required String displayName,
   });
 
+  Future<Either<Failure, UserEntity>> signInWithGoogle();
+
+  Future<Either<Failure, UserEntity>> continueAsGuest();
+
   Future<Either<Failure, void>> signOut();
 
   Future<Either<Failure, UserEntity?>> getCurrentUser();

@@ -8,7 +8,11 @@ class SearchBooksUseCase {
 
   SearchBooksUseCase(this.repository);
 
-  Future<Either<Failure, List<BookEntity>>> call(String query) {
-    return repository.searchBooks(query);
+  Future<Either<Failure, List<BookEntity>>> call(
+    String query, {
+    String? language,
+    BookFormatType? format,
+  }) {
+    return repository.searchBooks(query, language: language, format: format);
   }
 }

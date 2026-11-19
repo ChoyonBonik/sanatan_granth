@@ -9,17 +9,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignUpUseCase signUpUseCase;
   final SignOutUseCase signOutUseCase;
   final GetCurrentUserUseCase getCurrentUserUseCase;
+  final SignInWithGoogleUseCase signInWithGoogleUseCase;
+  final ContinueAsGuestUseCase continueAsGuestUseCase;
 
   AuthBloc({
     required this.signInUseCase,
     required this.signUpUseCase,
     required this.signOutUseCase,
     required this.getCurrentUserUseCase,
+    required this.signInWithGoogleUseCase,
+    required this.continueAsGuestUseCase,
   }) : super(const AuthState()) {
     on<CheckAuthStatusEvent>(_onCheckAuthStatus);
     on<SignInEvent>(_onSignIn);
     on<SignUpEvent>(_onSignUp);
     on<SignOutEvent>(_onSignOut);
+    on<GoogleSignInEvent>(_onGoogleSignIn);
+    on<ContinueAsGuestEvent>(_onContinueAsGuest);
   }
 
   Future<void> _onCheckAuthStatus(
@@ -86,5 +92,41 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(state.copyWith(status: AuthStatus.loading));
     await signOutUseCase();
     emit(const AuthState(status: AuthStatus.unauthenticated));
+  }
+
+  Future<void> _onGoogleSignIn(
+    GoogleSignInEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(state.copyWith(status: AuthStatus.loading));
+    final result = await signInWithGoogleUseCase();
+    result.fold(
+      (failure) => emit(state.copyWith(
+        status: AuthStatus.error,
+        errorMessage: failure.message,
+      )),
+      (user) => emit(state.copyWith(
+        status: AuthStatus.authenticated,
+        user: user,
+      )),
+    );
+  }
+
+  Future<void> _onContinueAsGuest(
+    ContinueAsGuestEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(state.copyWith(status: AuthStatus.loading));
+    final result = await continueAsGuestUseCase();
+    result.fold(
+      (failure) => emit(state.copyWith(
+        status: AuthStatus.error,
+        errorMessage: failure.message,
+      )),
+      (user) => emit(state.copyWith(
+        status: AuthStatus.authenticated,
+        user: user,
+      )),
+    );
   }
 }

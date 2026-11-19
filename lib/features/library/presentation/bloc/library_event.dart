@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import '../../domain/entities/book_entity.dart';
 
 abstract class LibraryEvent extends Equatable {
   const LibraryEvent();
@@ -27,11 +28,17 @@ class SelectCategoryFilterEvent extends LibraryEvent {
 
 class SearchQueryChangedEvent extends LibraryEvent {
   final String query;
+  final String? language;
+  final BookFormatType? format;
 
-  const SearchQueryChangedEvent(this.query);
+  const SearchQueryChangedEvent(
+    this.query, {
+    this.language,
+    this.format,
+  });
 
   @override
-  List<Object?> get props => <Object?>[query];
+  List<Object?> get props => <Object?>[query, language, format];
 }
 
 class ClearSearchEvent extends LibraryEvent {}
@@ -43,4 +50,13 @@ class LoadBookDetailsEvent extends LibraryEvent {
 
   @override
   List<Object?> get props => <Object?>[bookId];
+}
+
+class LoadReadingProgressEvent extends LibraryEvent {
+  final String userId;
+
+  const LoadReadingProgressEvent({this.userId = 'default_user'});
+
+  @override
+  List<Object?> get props => <Object?>[userId];
 }

@@ -44,6 +44,26 @@ class SignOutUseCase {
   }
 }
 
+class SignInWithGoogleUseCase {
+  final AuthRepository repository;
+
+  SignInWithGoogleUseCase(this.repository);
+
+  Future<Either<Failure, UserEntity>> call() {
+    return repository.signInWithGoogle();
+  }
+}
+
+class ContinueAsGuestUseCase {
+  final AuthRepository repository;
+
+  ContinueAsGuestUseCase(this.repository);
+
+  Future<Either<Failure, UserEntity>> call() {
+    return repository.continueAsGuest();
+  }
+}
+
 class GetCurrentUserUseCase {
   final AuthRepository repository;
 
